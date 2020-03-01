@@ -1,14 +1,20 @@
-import Head from 'next/head'
-import {Button} from "antd";
 import Header from "../components/Header";
+import {Col, Row} from "antd";
 
 const Home = () => (
     <>
-        <Head>
-            <title>Home</title>
-        </Head>
         <Header />
-        <div><Button>我是按钮</Button></div>
+        <Row className="main-content" type="flex" justify="center">
+            <Col className="main-content-left" xs={24} sm={24} md={16} lg={18} xl={14}  >
+                左侧
+            </Col>
+
+            <Col className="main-content-right" xs={0} sm={0} md={7} lg={5} xl={4}>
+                右侧
+            </Col>
+        </Row>
+
+
     </>
 )
 

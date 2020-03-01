@@ -1,13 +1,13 @@
 import React from 'react';
 import '../static/styles/components/header.css'
-import {Col, Icon, Menu, Row} from "antd";
+import {Col, Menu, Row} from "antd";
 import 'antd/dist/antd.css'; // new line of code
 import {HomeOutlined,YoutubeOutlined,SmileOutlined} from '@ant-design/icons';
 
 const Header = () => (
     <div className='header'>
         <Row type='flex' justify='center'>
-            <Col xs={24} sm={24} md={10} lg={10} xl={10}>
+            <Col xs={24} sm={24} md={10} lg={15} xl={12}>
                 <span className="header-title">技术胖</span>
                 <span className="header-introduce">专注前端开发,每年100集免费视频。</span>
             </Col>

@@ -1,3 +1,21 @@
 body {
     background-color: #f6f6f6;
 }
+
+.main-content {
+
+}
+.main-content-left {
+    background-color: #FFF;
+    padding:.3rem;
+    border-radius: .3rem;
+    border-bottom:1px solid #eee;
+}
+
+.main-content-right {
+    background-color: #FFF;
+    margin-left: .5rem;
+    padding:.3rem;
+    border-radius: .3rem;
+    border-bottom:1px solid #eee;
+}
