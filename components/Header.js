@@ -1,7 +1,7 @@
 import React from 'react';
+
 import '../static/styles/components/header.css'
 import {Col, Menu, Row} from "antd";
-import 'antd/dist/antd.css'; // new line of code
 import {HomeOutlined,YoutubeOutlined,SmileOutlined} from '@ant-design/icons';
 
 const Header = () => (

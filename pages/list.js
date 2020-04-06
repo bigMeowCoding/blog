@@ -1,16 +1,17 @@
 import Header from "../components/Header";
 import React, {useState} from 'react'
 
-import {Col, Row, List} from "antd";
+import {Col, Row, List, Breadcrumb} from "antd";
 import {CalendarOutlined, FolderOpenOutlined, FireOutlined} from '@ant-design/icons';
 
-import '../static/styles/pages/index.css'
 import Author from "../components/Author";
 import Advert from "../components/Advert";
 import Footer from "../components/Footer";
 
 
-const Home = () => {
+
+
+const MyList = () => {
     const [mylist, setMylist] = useState(
         [
             {
@@ -37,6 +38,12 @@ const Home = () => {
         <Row className="main-content" type="flex" justify="center">
             <Col className="main-content-left" xs={24} sm={24} md={16} lg={18} xl={14}>
                 <div>
+                    <div className="bread-div">
+                        <Breadcrumb>
+                            <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
+                            <Breadcrumb.Item>视频列表</Breadcrumb.Item>
+                        </Breadcrumb>
+                    </div>
                     <List
                         header={<div>最新日志</div>}
                         itemLayout="vertical"
@@ -65,4 +72,4 @@ const Home = () => {
     </>
 };
 
-export default Home
+export default MyList
