@@ -9,10 +9,11 @@ import Author from "../components/Author";
 import Advert from "../components/Advert";
 import Footer from "../components/Footer";
 import * as axios from "axios";
+import Link from "next/link";
 
 
 const Home = (list) => {
-    const [ mylist , setMylist ] = useState( list.data);
+    const [mylist, setMylist] = useState(list.data);
 
     return <>
         <Header/>
@@ -25,7 +26,11 @@ const Home = (list) => {
                         dataSource={mylist}
                         renderItem={item => (
                             <List.Item>
-                                <div className="list-title">{item.title}</div>
+                                <div className="list-title">
+                                    <Link href={{pathname: '/detail', query: {id: item.id}}}>
+                                        <a>{item.title}</a>
+                                    </Link>
+                                </div>
                                 <div className="list-icon">
                                     <span><CalendarOutlined/>{item.addTime}</span>
                                     <span><FolderOpenOutlined/> {item.typeName}</span>
@@ -46,11 +51,11 @@ const Home = (list) => {
         <Footer/>
     </>
 };
-Home.getInitialProps = async ()=>{
-    const promise = new Promise((resolve)=>{
+Home.getInitialProps = async () => {
+    const promise = new Promise((resolve) => {
         axios('http://127.0.0.1:7002/default/getArticleList').then(
-            (res)=>{
-                console.log('远程获取数据结果:',res.data.data)
+            (res) => {
+                console.log('远程获取数据结果:', res.data.data)
                 resolve(res.data)
             }
         )
