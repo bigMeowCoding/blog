@@ -10,6 +10,7 @@ import Advert from "../components/Advert";
 import Footer from "../components/Footer";
 import * as axios from "axios";
 import Link from "next/link";
+import servicePath from "../config/apiUrl";
 
 
 const Home = (list) => {
@@ -53,9 +54,8 @@ const Home = (list) => {
 };
 Home.getInitialProps = async () => {
     const promise = new Promise((resolve) => {
-        axios('http://127.0.0.1:7002/default/getArticleList').then(
+        axios(servicePath.getArticleList).then(
             (res) => {
-                console.log('远程获取数据结果:', res.data.data)
                 resolve(res.data)
             }
         )

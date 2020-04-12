@@ -17,13 +17,14 @@ import '../static/styles/pages/detail.css'
 import * as axios from "axios";
 
 import Tocify from '../components/tocify.tsx'
+import servicePath from "../config/apiUrl";
 
 
 const Detail = (props) => {
     const tocify = new Tocify()
 
     const renderer = new marked.Renderer();
-    renderer.heading = function(text, level, raw) {
+    renderer.heading = function (text, level, raw) {
         const anchor = tocify.add(text, level);
         return `<a id="${anchor}" href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
     };
@@ -69,7 +70,7 @@ const Detail = (props) => {
                             </div>
 
                             <div className="detail-content"
-                            dangerouslySetInnerHTML={{__html:html}}
+                                 dangerouslySetInnerHTML={{__html: html}}
                             >
                             </div>
 
@@ -103,7 +104,7 @@ Detail.getInitialProps = async (context) => {
     let id = context.query.id
     const promise = new Promise((resolve) => {
 
-        axios('http://127.0.0.1:7002/default/getArticleById/' + id).then(
+        axios(servicePath.getArticleById + "/" + id).then(
             (res) => {
                 resolve(res.data.data[0])
             }
