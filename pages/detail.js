@@ -2,9 +2,7 @@ import React from "react";
 
 import {CalendarOutlined, FolderOpenOutlined, FireOutlined} from '@ant-design/icons';
 import {Affix, Breadcrumb, Col, Row} from "antd";
-import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
-
 import marked from 'marked'
 import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';

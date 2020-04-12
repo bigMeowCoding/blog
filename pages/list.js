@@ -10,13 +10,31 @@ import Footer from "../components/Footer";
 import * as axios from "axios";
 import servicePath from "../config/apiUrl";
 import Link from "next/link";
-
+import 'markdown-navbar/dist/navbar.css';
+import marked from 'marked'
+import hljs from "highlight.js";
+import 'highlight.js/styles/monokai-sublime.css';
 
 const MyList = (list) => {
     const [mylist, setMylist] = useState(list.data);
+    const renderer = new marked.Renderer();
+
     useEffect(()=>{
         setMylist(list.data)
     })
+    marked.setOptions({
+        renderer: renderer,
+        gfm: true,
+        pedantic: false,
+        sanitize: false,
+        tables: true,
+        breaks: false,
+        smartLists: true,
+        smartypants: false,
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+    });
     return <>
         <Header/>
         <Row className="main-content" type="flex" justify="center">
@@ -45,7 +63,10 @@ const MyList = (list) => {
                                     <span><FolderOpenOutlined/> {item.typeName}</span>
                                     <span><FireOutlined/>{item.view_count}人</span>
                                 </div>
-                                <div className="list-context">{item.introduce}</div>
+                                <div className="list-context"
+                                     dangerouslySetInnerHTML={{__html: marked(item.introduce)}}
+
+                                ></div>
                             </List.Item>
                         )}
                     />

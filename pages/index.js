@@ -3,6 +3,10 @@ import React, {useState} from 'react'
 
 import {Col, Row, List} from "antd";
 import {CalendarOutlined, FolderOpenOutlined, FireOutlined} from '@ant-design/icons';
+import 'markdown-navbar/dist/navbar.css';
+import marked from 'marked'
+import hljs from "highlight.js";
+import 'highlight.js/styles/monokai-sublime.css';
 
 import '../static/styles/pages/index.css'
 import Author from "../components/Author";
@@ -15,7 +19,20 @@ import servicePath from "../config/apiUrl";
 
 const Home = (list) => {
     const [mylist, setMylist] = useState(list.data);
-
+    const renderer = new marked.Renderer();
+    marked.setOptions({
+        renderer: renderer,
+        gfm: true,
+        pedantic: false,
+        sanitize: false,
+        tables: true,
+        breaks: false,
+        smartLists: true,
+        smartypants: false,
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+    });
     return <>
         <Header/>
         <Row className="main-content" type="flex" justify="center">
@@ -37,7 +54,9 @@ const Home = (list) => {
                                     <span><FolderOpenOutlined/> {item.typeName}</span>
                                     <span><FireOutlined/>{item.view_count}人</span>
                                 </div>
-                                <div className="list-context">{item.introduce}</div>
+                                <div className="list-context"
+                                     dangerouslySetInnerHTML={{__html: marked(item.introduce)}}
+                                ></div>
                             </List.Item>
                         )}
                     />
