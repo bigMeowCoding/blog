@@ -44,7 +44,6 @@ class HomeController extends Controller {
     }
 
     async getListById() {
-        debugger
         let id = this.ctx.params.id
         let sql = 'SELECT article.id as id,' +
             'article.title as title,' +

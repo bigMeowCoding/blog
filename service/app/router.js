@@ -1,4 +1,6 @@
 const defaultRouter = require('./router/default');
+const adminRouter = require('./router/admin');
+
 'use strict';
 
 /**
@@ -6,4 +8,5 @@ const defaultRouter = require('./router/default');
  */
 module.exports = app => {
   defaultRouter(app);
+  adminRouter(app)
 };
