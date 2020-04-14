@@ -2,6 +2,8 @@ import React, {useState} from "react";
 
 import {Layout, Menu, Breadcrumb} from 'antd';
 import './index.scss'
+import {Route} from "react-router-dom";
+import AddArticle from "../add-article/add-article";
 
 const {Header, Content, Footer, Sider} = Layout;
 const {SubMenu} = Menu;
@@ -33,7 +35,7 @@ function AdminIndex() {
                         title={
                             <span>
                   {/*<Icon type="user"/>*/}
-                  <span>文章管理</span>
+                                <span>文章管理</span>
                 </span>
                         }
                     >
@@ -55,7 +57,13 @@ function AdminIndex() {
                         <Breadcrumb.Item>后台管理</Breadcrumb.Item>
                         <Breadcrumb.Item>工作台</Breadcrumb.Item>
                     </Breadcrumb>
-                    <div style={{padding: 24, background: '#fff', minHeight: 360}}>博客工作台.</div>
+                    <div style={{padding: 24, background: '#fff', minHeight: 360}}>
+                        <div>
+                            <Route path="/index/" exact component={AddArticle}>
+
+                            </Route>
+                        </div>
+                    </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>JSPang.com</Footer>
             </Layout>
