@@ -6,7 +6,6 @@ import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import KeyOutlined from "@ant-design/icons/lib/icons/KeyOutlined";
 
 function Login() {
-    const {Search} = Input;
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
