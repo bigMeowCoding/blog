@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import marked from 'marked'
 import {Row, Col, Input, Select, Button, DatePicker} from 'antd'
 import './add-article.scss'
+import servicePath from "../../config/apiUrl";
+import axios from 'axios';
 
 const {Option} = Select;
 const {TextArea} = Input
 
 
-function AddArticle() {
+function AddArticle(props) {
+    let typeValue = null;
     const [articleId, setArticleId] = useState(0)  // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
     const [articleTitle, setArticleTitle] = useState('')   //文章标题
     const [articleContent, setArticleContent] = useState('')  //markdown的编辑内容
@@ -16,8 +19,26 @@ function AddArticle() {
     const [introducehtml, setIntroducehtml] = useState('等待编辑') //简介的html内容
     const [showDate, setShowDate] = useState()   //发布日期
     const [updateDate, setUpdateDate] = useState() //修改日志的日期
+    const [selectedType, setSelectType] = useState() //选择的文章类别
     const [typeInfo, setTypeInfo] = useState([]) // 文章类别信息
-    const [selectedType, setSelectType] = useState(1) //选择的文章类别
+    console.log('render', selectedType, typeInfo)
+    useEffect(() => {
+        getTypeInfo()
+
+    }, [])
+
+    useEffect(() => {
+        // setTimeout(() => {
+        setSelectType(typeInfo[0] && typeInfo[2].id)
+        // defaultValue = typeInfo[0] && typeInfo[1].id
+
+        // console.log('effect',defaultValue )
+        //
+        // })
+        // console.log()
+        // console.log(selectedType)
+    }, [typeInfo])
+
     marked.setOptions({
         renderer: new marked.Renderer(),
         gfm: true,
@@ -39,6 +60,38 @@ function AddArticle() {
         let html = marked(e.target.value)
         setIntroducehtml(html)
     }
+
+    //选择类别后的便哈
+    const selectTypeHandler = (value) => {
+        setSelectType(value)
+        console.log(selectedType)
+    }
+    //从中台得到文章类别信息
+    const getTypeInfo = () => {
+
+        axios({
+            method: 'get',
+            url: servicePath.getTypeInfo,
+            header: {'Access-Control-Allow-Origin': '*'},
+            withCredentials: true
+        }).then(
+            res => {
+                if (res.data.data === "没有登录") {
+                    localStorage.removeItem('openId')
+                    props.history.push('/')
+                } else {
+                    // setTimeout(()=> {
+                    // setSelectType(1)
+
+                    setTypeInfo(res.data.data)
+
+                    // },1000)
+
+                }
+
+            }
+        )
+    }
     return (
         <div>
             <Row gutter={5}>
@@ -49,11 +102,18 @@ function AddArticle() {
                                 placeholder="博客标题"
                                 size="large"/>
                         </Col>
+
                         <Col span={4}>
                             &nbsp;
-                            <Select defaultValue="Sign Up" size="large">
-                                <Option value="Sign Up">视频教程</Option>
+                            <Select  value={selectedType} size="large" onChange={selectTypeHandler}>
+                                {
+                                    typeInfo.map((item, index) => {
+                                        return (<Option key={index} value={item.id}>{item.typeName}</Option>)
+                                    })
+                                }
+
                             </Select>
+
                         </Col>
                     </Row>
                     <br/>
