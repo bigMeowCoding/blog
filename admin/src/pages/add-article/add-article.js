@@ -21,7 +21,6 @@ function AddArticle(props) {
     const [updateDate, setUpdateDate] = useState() //修改日志的日期
     const [selectedType, setSelectType] = useState() //选择的文章类别
     const [typeInfo, setTypeInfo] = useState([]) // 文章类别信息
-    console.log('render', selectedType, typeInfo)
     useEffect(() => {
         getTypeInfo()
 
@@ -64,7 +63,6 @@ function AddArticle(props) {
     //选择类别后的便哈
     const selectTypeHandler = (value) => {
         setSelectType(value)
-        console.log(selectedType)
     }
     //从中台得到文章类别信息
     const getTypeInfo = () => {
@@ -80,12 +78,8 @@ function AddArticle(props) {
                     localStorage.removeItem('openId')
                     props.history.push('/')
                 } else {
-                    // setTimeout(()=> {
-                    // setSelectType(1)
-
                     setTypeInfo(res.data.data)
 
-                    // },1000)
 
                 }
 
