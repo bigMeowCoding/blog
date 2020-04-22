@@ -1,4 +1,4 @@
-import {Button, Col, List, Row, Modal,message} from "antd";
+import {Button, Col, List, Row, Modal, message} from "antd";
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import servicePath from "../../config/apiUrl";
@@ -46,6 +46,12 @@ function ArticleList(props) {
                 message.success('没有任何改变')
             },
         });
+
+    }
+//修改文章
+    const updateArticle = (id, checked) => {
+
+        props.history.push('/index/add/' + id)
 
     }
 
@@ -98,7 +104,11 @@ function ArticleList(props) {
                             </Col>
 
                             <Col span={4}>
-                                <Button type="primary">修改</Button>&nbsp;
+                                <Button type="primary" onClick={
+                                    () => {
+                                        updateArticle(item.id)
+                                    }
+                                }>修改</Button>&nbsp;
 
                                 <Button onClick={() => {
                                     delArticle(item.id)
