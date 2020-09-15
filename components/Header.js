@@ -34,8 +34,8 @@ const Header = () => {
     return <div className='header'>
         <Row type='flex' justify='center'>
             <Col xs={24} sm={24} md={10} lg={15} xl={12}>
-                <span className="header-title">技术胖</span>
-                <span className="header-introduce">专注前端开发,每年100集免费视频。</span>
+                <span className="header-title">BigMeowCoding</span>
+                <span className="header-introduce">健康生活，快乐编程</span>
             </Col>
             <Col className="menu-box" xs={0} sm={0} md={14} lg={8} xl={6}>
                 <Menu mode='horizontal'
