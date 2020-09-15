@@ -1,4 +1,4 @@
-let ipUrl = 'http://127.0.0.1:7002/admin/'
+let ipUrl = 'http://www.bigmeow.club:7002/admin/'
 
 let servicePath = {
     getTypeInfo: ipUrl + 'getTypeInfo',  //  获得文章类别信息

@@ -10,7 +10,7 @@ module.exports = appInfo => {
      * built-in config
      * @type {Egg.EggAppConfig}
      **/
-    const config = exports = {};
+    const config  =exports= {};
 
     // use for cookie sign key, should change to your own and keep security
     config.keys = appInfo.name + '_1586172996609_2814';
@@ -33,8 +33,8 @@ module.exports = appInfo => {
             // username
             user: 'root',
             // password
-            password: 'zyj5632403',
-            // database
+            password: 'zyj5632403',           
+ 		// database
             database: 'react_blog',
         },
         // load into app, default is open
@@ -45,14 +45,13 @@ module.exports = appInfo => {
     config.security = {
         csrf: {
             enable: false
-        },
-        domainWhiteList: ['*']
+        }
     };
-    config.cors = {
-        origin: 'http://localhost:3000',
-        credentials: true,  //允许Cook可以跨域
-        allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
-    };
+config.cors = {
+  credentials: true,
+  origin: ctx => ctx.get('origin'),
+}
+
     return {
         ...config,
         ...userConfig,
