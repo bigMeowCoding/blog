@@ -45,7 +45,12 @@ module.exports = appInfo => {
     config.security = {
         csrf: {
             enable: false
-        }
+        },
+        domainWhiteList: ['*']
+    };
+    config.cors = {
+        credentials: true,  //允许Cook可以跨域
+        allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
     };
 config.cors = {
   credentials: true,
