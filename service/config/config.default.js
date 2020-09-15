@@ -33,7 +33,7 @@ module.exports = appInfo => {
             // username
             user: 'root',
             // password
-            password: 'zyj5632403',           
+            password: 'zyj5632403',
  		// database
             database: 'react_blog',
         },
@@ -47,10 +47,6 @@ module.exports = appInfo => {
             enable: false
         },
         domainWhiteList: ['*']
-    };
-    config.cors = {
-        credentials: true,  //允许Cook可以跨域
-        allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
     };
 config.cors = {
   credentials: true,
