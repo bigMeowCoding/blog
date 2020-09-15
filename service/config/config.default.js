@@ -33,7 +33,7 @@ module.exports = appInfo => {
             // username
             user: 'root',
             // password
-            password: 'zyj5632403',           
+            password: 'zyj5632403',
  		// database
             database: 'react_blog',
         },
@@ -45,7 +45,8 @@ module.exports = appInfo => {
     config.security = {
         csrf: {
             enable: false
-        }
+        },
+        domainWhiteList: ['*']
     };
 config.cors = {
   credentials: true,
