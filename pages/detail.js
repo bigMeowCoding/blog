@@ -9,7 +9,6 @@ import 'highlight.js/styles/monokai-sublime.css';
 
 import Author from "../components/Author";
 import Header from "../components/Header";
-import Advert from "../components/Advert";
 import Footer from "../components/Footer";
 import '../static/styles/pages/detail.css'
 import * as axios from "axios";

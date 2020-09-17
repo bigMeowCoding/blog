@@ -7,12 +7,15 @@ import {
   HomeOutlined,
   YoutubeOutlined,
   SmileOutlined,
+  ToolOutlined
 } from "@ant-design/icons";
 import * as axios from "axios";
 import servicePath from "../config/apiUrl";
 
 const Header = () => {
   const [navArray, setNavArray] = useState([]);
+  const [currentSelect, setCurrentSelect] = useState("0");
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(servicePath.getTypeInfo).then((res) => {
@@ -23,13 +26,16 @@ const Header = () => {
     };
     fetchData();
   }, []);
+
   const handleClick = (e) => {
+    setCurrentSelect(e.key);
     if (e.key === "0") {
       Router.push("/index");
     } else {
       Router.push("/list?id=" + e.key);
     }
   };
+
   return (
     <div className="header">
       <Row type="flex" justify="center">
@@ -40,7 +46,11 @@ const Header = () => {
           <span className="header-introduce">健康生活，快乐编程</span>
         </Col>
         <Col className="menu-box" xs={0} sm={0} md={14} lg={13} xl={10}>
-          <Menu mode="horizontal" onClick={handleClick}>
+          <Menu
+            mode="horizontal"
+            selectedKeys={currentSelect}
+            onClick={handleClick}
+          >
             <Menu.Item key="0">
               <HomeOutlined /> 首页
             </Menu.Item>
@@ -68,5 +78,7 @@ function HeaderIcon(props) {
       return <YoutubeOutlined />;
     case 2:
       return <SmileOutlined />;
+    case 3:
+      return <ToolOutlined />;
   }
 }
