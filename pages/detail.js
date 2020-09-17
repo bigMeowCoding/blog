@@ -48,23 +48,23 @@ const Detail = (props) => {
             <Row className="main-content" type="flex" justify="center">
                 <Col className="main-content-left" xs={24} sm={24} md={16} lg={18} xl={14}>
                     <div>
-                        <div className="bread-box">
-                            <Breadcrumb>
-                                <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
-                                <Breadcrumb.Item>视频列表</Breadcrumb.Item>
-                                <Breadcrumb.Item>xxxx</Breadcrumb.Item>
-                            </Breadcrumb>
-                        </div>
+                        {/*<div className="bread-box">*/}
+                            {/*<Breadcrumb>*/}
+                                {/*<Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>*/}
+                                {/*<Breadcrumb.Item>视频列表</Breadcrumb.Item>*/}
+                                {/*<Breadcrumb.Item>xxxx</Breadcrumb.Item>*/}
+                            {/*</Breadcrumb>*/}
+                        {/*</div>*/}
 
                         <div>
                             <div className="detail-title">
-                                React实战视频教程-技术胖Blog开发(更新08集)
+                                {props.title}
                             </div>
 
                             <div className="list-icon center">
-                                <span><CalendarOutlined/>2019-06-28</span>
-                                <span><FolderOpenOutlined/> 视频教程</span>
-                                <span><FireOutlined/>5498人</span>
+                                <span><CalendarOutlined/>{props.addTime}</span>
+                                <span><FolderOpenOutlined/> {props.typeName}</span>
+                                <span><FireOutlined/>{props.view_count}人</span>
                             </div>
 
                             <div className="detail-content"
@@ -97,7 +97,6 @@ const Detail = (props) => {
 }
 
 Detail.getInitialProps = async (context) => {
-    console.log(context.query.id)
     let id = context.query.id
     const promise = new Promise((resolve) => {
 
