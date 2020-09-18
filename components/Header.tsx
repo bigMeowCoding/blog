@@ -14,16 +14,26 @@ import servicePath from "../config/apiUrl";
 import {
   headerLeftGridConfig,
   headerRightGridConfig,
-  mainPageLeftGridConfig,
-  mainPageRightGridConfig,
 } from "../config/baseConfig";
 
+function HeaderIcon(props) {
+  let { type } = props;
+  switch (type) {
+    case 1:
+      return <YoutubeOutlined />;
+    case 2:
+      return <SmileOutlined />;
+    case 3:
+      return <ToolOutlined />;
+  }
+}
 const Header = () => {
   const [navArray, setNavArray] = useState([]);
   const [currentSelect, setCurrentSelect] = useState("0");
 
   useEffect(() => {
     const fetchData = async () => {
+      // @ts-ignore
       const result = await axios(servicePath.getTypeInfo).then((res) => {
         setNavArray(res.data.data);
         return res.data.data;
@@ -44,7 +54,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <Row type="flex" justify="center">
+      <Row justify="center">
         <Col
           xs={headerLeftGridConfig.xs}
           sm={headerLeftGridConfig.sm}
@@ -67,7 +77,7 @@ const Header = () => {
         >
           <Menu
             mode="horizontal"
-            selectedKeys={currentSelect}
+            selectedKeys={[currentSelect]}
             onClick={handleClick}
           >
             <Menu.Item key="0">
@@ -87,17 +97,4 @@ const Header = () => {
     </div>
   );
 };
-
 export default Header;
-
-function HeaderIcon(props) {
-  let { type } = props;
-  switch (type) {
-    case 1:
-      return <YoutubeOutlined />;
-    case 2:
-      return <SmileOutlined />;
-    case 3:
-      return <ToolOutlined />;
-  }
-}

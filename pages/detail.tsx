@@ -17,7 +17,7 @@ import Footer from "../components/Footer";
 import "../static/styles/pages/detail.css";
 import * as axios from "axios";
 
-import Tocify from "../components/tocify.tsx";
+import Tocify from "../components/tocify";
 import servicePath from "../config/apiUrl";
 import {
   mainPageLeftGridConfig,
@@ -50,7 +50,7 @@ const Detail = (props) => {
   return (
     <>
       <Header />
-      <Row className="main-content" type="flex" justify="center">
+      <Row className="main-content" justify="center">
         <Col
           className="main-content-left"
           xs={mainPageLeftGridConfig.xs}
@@ -118,6 +118,7 @@ const Detail = (props) => {
 Detail.getInitialProps = async (context) => {
   let id = context.query.id;
   const promise = new Promise((resolve) => {
+    // @ts-ignore
     axios(servicePath.getArticleById + "/" + id).then((res) => {
       resolve(res.data.data[0]);
     });
