@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   CalendarOutlined,
@@ -24,9 +24,9 @@ import {
   mainPageRightGridConfig,
 } from "../config/baseConfig";
 
-const Detail = (props) => {
+const Detail = (props: { typeId?: string; [key: string]: any }) => {
   const tocify = new Tocify();
-
+  const { typeName, typeId } = props;
   const renderer = new marked.Renderer();
   renderer.heading = function (text, level, raw) {
     const anchor = tocify.add(text, level);
@@ -46,10 +46,10 @@ const Detail = (props) => {
     },
   });
   let html = marked(props.article_content);
-
+  console.log(typeId);
   return (
     <>
-      <Header />
+      <Header typeName={typeName} typeId={typeId} />
       <Row className="main-content" justify="center">
         <Col
           className="main-content-left"
@@ -116,11 +116,16 @@ const Detail = (props) => {
 };
 
 Detail.getInitialProps = async (context) => {
-  let id = context.query.id;
+  let id = context.query.id,
+    typeName = context.query.typeName;
   const promise = new Promise((resolve) => {
     // @ts-ignore
     axios(servicePath.getArticleById + "/" + id).then((res) => {
-      resolve(res.data.data[0]);
+      const content = res.data.data[0];
+      resolve({
+        ...content,
+        typeName,
+      });
     });
   });
 

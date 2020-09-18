@@ -40,10 +40,11 @@ const Home = (list) => {
       return hljs.highlightAuto(code).value;
     },
   });
+  console.log(mylist);
   return (
     <>
       <Header />
-      <Row className="main-content" type="flex" justify="center">
+      <Row className="main-content" justify="center">
         <Col
           className="main-content-left"
           xs={mainPageLeftGridConfig.xs}
@@ -52,17 +53,19 @@ const Home = (list) => {
           lg={mainPageLeftGridConfig.lg}
           xl={mainPageLeftGridConfig.xl}
         >
-          {" "}
           <div>
             <List
               header={<div>最新日志</div>}
               itemLayout="vertical"
               dataSource={mylist}
-              renderItem={(item) => (
+              renderItem={(item: any) => (
                 <List.Item>
                   <div className="list-title">
                     <Link
-                      href={{ pathname: "/detail", query: { id: item.id } }}
+                      href={{
+                        pathname: "/detail",
+                        query: { id: item.id, typeName: item.typeName },
+                      }}
                     >
                       <a>{item.title}</a>
                     </Link>
@@ -98,7 +101,6 @@ const Home = (list) => {
           lg={mainPageRightGridConfig.lg}
           xl={mainPageRightGridConfig.xl}
         >
-          {" "}
           <Author />
         </Col>
       </Row>
@@ -108,6 +110,7 @@ const Home = (list) => {
 };
 Home.getInitialProps = async () => {
   const promise = new Promise((resolve) => {
+    // @ts-ignore
     axios(servicePath.getArticleList).then((res) => {
       resolve(res.data);
     });

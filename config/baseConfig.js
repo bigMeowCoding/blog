@@ -26,3 +26,5 @@ export const headerRightGridConfig = {
   lg: 9,
   xl: 9,
 };
+
+export const HeaderIndexType = "0";

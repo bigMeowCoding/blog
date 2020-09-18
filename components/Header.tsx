@@ -15,6 +15,7 @@ import {
   headerLeftGridConfig,
   headerRightGridConfig,
 } from "../config/baseConfig";
+import { HeaderComponent, MenuType } from "../config/interface";
 
 function HeaderIcon(props) {
   let { type } = props;
@@ -27,18 +28,34 @@ function HeaderIcon(props) {
       return <ToolOutlined />;
   }
 }
-const Header = () => {
+const Header = (props: HeaderComponent) => {
   const [navArray, setNavArray] = useState([]);
   const [currentSelect, setCurrentSelect] = useState("0");
+
+  function selectMenuByTypeName(data: MenuType[]) {
+    if (props.typeName) {
+      const menu = data.find((item) => {
+        return item.typeName === props.typeName;
+      });
+      if (menu) {
+        setTimeout(() => {
+          setCurrentSelect(String(menu.id));
+        });
+      }
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       // @ts-ignore
       const result = await axios(servicePath.getTypeInfo).then((res) => {
-        setNavArray(res.data.data);
-        return res.data.data;
+        const data: MenuType[] = res.data.data;
+        setNavArray(data);
+        selectMenuByTypeName(data);
+        return data;
       });
       setNavArray(result);
+      setCurrentSelect(String(props.typeId) || "0");
     };
     fetchData();
   }, []);

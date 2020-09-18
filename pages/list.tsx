@@ -44,8 +44,8 @@ const MyList = (list) => {
   });
   return (
     <>
-      <Header />
-      <Row className="main-content" type="flex" justify="center">
+      <Header typeId={list.typeId} />
+      <Row className="main-content" justify="center">
         <Col
           className="main-content-left"
           xs={mainPageLeftGridConfig.xs}
@@ -68,11 +68,14 @@ const MyList = (list) => {
               header={<div>最新日志</div>}
               itemLayout="vertical"
               dataSource={mylist}
-              renderItem={(item) => (
+              renderItem={(item: any) => (
                 <List.Item>
                   <div className="list-title">
                     <Link
-                      href={{ pathname: "/detail", query: { id: item.id } }}
+                      href={{
+                        pathname: "/detail",
+                        query: { id: item.id, typeId: list.typeId },
+                      }}
                     >
                       <a>{item.title}</a>
                     </Link>
@@ -119,7 +122,13 @@ const MyList = (list) => {
 MyList.getInitialProps = async (context) => {
   let id = context.query.id;
   const promise = new Promise((resolve) => {
-    axios(servicePath.getListById + "/" + id).then((res) => resolve(res.data));
+    // @ts-ignore
+    axios(servicePath.getListById + "/" + id).then((res) =>
+      resolve({
+        ...res.data,
+        typeId: id,
+      })
+    );
   });
   return await promise;
 };
