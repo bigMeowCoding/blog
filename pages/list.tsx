@@ -9,7 +9,6 @@ import {
 } from "@ant-design/icons";
 
 import Author from "../components/Author";
-import Advert from "../components/Advert";
 import Footer from "../components/Footer";
 import * as axios from "axios";
 import servicePath from "../config/apiUrl";
