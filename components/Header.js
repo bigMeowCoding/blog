@@ -7,10 +7,16 @@ import {
   HomeOutlined,
   YoutubeOutlined,
   SmileOutlined,
-  ToolOutlined
+  ToolOutlined,
 } from "@ant-design/icons";
 import * as axios from "axios";
 import servicePath from "../config/apiUrl";
+import {
+  headerLeftGridConfig,
+  headerRightGridConfig,
+  mainPageLeftGridConfig,
+  mainPageRightGridConfig,
+} from "../config/baseConfig";
 
 const Header = () => {
   const [navArray, setNavArray] = useState([]);
@@ -39,13 +45,26 @@ const Header = () => {
   return (
     <div className="header">
       <Row type="flex" justify="center">
-        <Col xs={24} sm={24} md={10} lg={10} xl={10}>
+        <Col
+          xs={headerLeftGridConfig.xs}
+          sm={headerLeftGridConfig.sm}
+          md={headerLeftGridConfig.md}
+          lg={headerLeftGridConfig.lg}
+          xl={headerLeftGridConfig.xl}
+        >
           <a href="/">
             <span className="header-title">BigMeowCoding</span>
           </a>
           <span className="header-introduce">健康生活，快乐编程</span>
         </Col>
-        <Col className="menu-box" xs={0} sm={0} md={14} lg={13} xl={10}>
+        <Col
+          className="menu-box"
+          xs={headerRightGridConfig.xs}
+          sm={headerRightGridConfig.sm}
+          md={headerRightGridConfig.md}
+          lg={headerRightGridConfig.lg}
+          xl={headerRightGridConfig.xl}
+        >
           <Menu
             mode="horizontal"
             selectedKeys={currentSelect}
