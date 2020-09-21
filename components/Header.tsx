@@ -30,8 +30,8 @@ function HeaderIcon(props) {
 }
 const Header = (props: HeaderComponent) => {
   const [navArray, setNavArray] = useState([]);
-  const [currentSelect, setCurrentSelect] = useState("0");
-
+  const INDEX_KEY = "-1";
+  const [currentSelect, setCurrentSelect] = useState([INDEX_KEY]);
   function selectMenuByTypeName(data: MenuType[]) {
     if (props.typeName) {
       const menu = data.find((item) => {
@@ -39,7 +39,7 @@ const Header = (props: HeaderComponent) => {
       });
       if (menu) {
         setTimeout(() => {
-          setCurrentSelect(String(menu.id));
+          setCurrentSelect([String(menu.id)] || [INDEX_KEY]);
         });
       }
     }
@@ -55,16 +55,20 @@ const Header = (props: HeaderComponent) => {
         return data;
       });
       setNavArray(result);
-      setCurrentSelect(String(props.typeId) || "0");
+      setTimeout(() => {
+        setCurrentSelect([props.typeId ? String(props.typeId) : INDEX_KEY]);
+      });
     };
     fetchData();
   }, []);
 
   const handleClick = (e) => {
-    setCurrentSelect(e.key);
-    if (e.key === "0") {
+    console.log(e.key);
+    if (e.key === String(INDEX_KEY)) {
+      setCurrentSelect([INDEX_KEY]);
       Router.push("/index");
     } else {
+      setCurrentSelect([e.key]);
       Router.push("/list?id=" + e.key);
     }
   };
@@ -94,10 +98,10 @@ const Header = (props: HeaderComponent) => {
         >
           <Menu
             mode="horizontal"
-            selectedKeys={[currentSelect]}
+            selectedKeys={currentSelect}
             onClick={handleClick}
           >
-            <Menu.Item key="0">
+            <Menu.Item key={INDEX_KEY}>
               <HomeOutlined /> 首页
             </Menu.Item>
             {navArray.map((item) => {

@@ -1,5 +1,5 @@
 export interface HeaderComponent {
-  typeId?: string;
+  typeId?: number;
   typeName?: string;
   [key: string]: any;
 }
