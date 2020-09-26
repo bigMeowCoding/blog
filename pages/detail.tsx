@@ -46,7 +46,6 @@ const Detail = (props: { typeId?: number; [key: string]: any }) => {
     },
   });
   let html = marked(props.article_content);
-  console.log(typeId);
   return (
     <>
       <Header typeName={typeName} typeId={typeId} />

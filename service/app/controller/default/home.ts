@@ -45,9 +45,7 @@ class HomeController extends Controller {
 
   async getTypeInfo() {
     let menuList: MenuType[] = await this.app.mysql.select("type");
-    // const menuList = result.data;
     menuList = makeMenuTree(menuList);
-    console.log(menuList);
     this.ctx.body = {
       code: HttpStatus.ok,
       data: menuList,
