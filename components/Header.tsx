@@ -15,7 +15,7 @@ import {
   headerLeftGridConfig,
   headerRightGridConfig,
 } from "../config/baseConfig";
-import { HeaderComponent, MenuType } from "../config/interface";
+import {HeaderComponent, MenuType} from "../libs/interface";
 
 function HeaderIcon(props) {
   let { type } = props;
