@@ -24,7 +24,7 @@ import {
   mainPageRightGridConfig,
 } from "../config/baseConfig";
 
-const Detail = (props: { typeId?: string; [key: string]: any }) => {
+const Detail = (props: { typeId?: number; [key: string]: any }) => {
   const tocify = new Tocify();
   const { typeName, typeId } = props;
   const renderer = new marked.Renderer();

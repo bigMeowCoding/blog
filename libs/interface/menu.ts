@@ -4,6 +4,7 @@ export interface MenuType {
   id: number;
   icon: number;
   parentId: number;
+  children: MenuType[];
 }
 
 export interface HeaderComponent {

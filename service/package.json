@@ -4,6 +4,7 @@
   "description": "",
   "private": true,
   "egg": {
+    "typescript": true,
     "declarations": true
   },
   "dependencies": {
@@ -28,7 +29,7 @@
     "start": "egg-scripts start --daemon  --title=egg-server-service",
     "stop": "egg-scripts stop --title=egg-server-service",
     "dev": "egg-bin dev --port=7002",
-    "debug": "egg-bin debug",
+    "debug": "egg-bin debug --port=7002 ",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
