@@ -15,7 +15,8 @@ import {
   headerLeftGridConfig,
   headerRightGridConfig,
 } from "../config/baseConfig";
-import {HeaderComponent, MenuType} from "../libs/interface";
+import { HeaderComponent, MenuType } from "../libs/interface";
+import SubMenu from "antd/lib/menu/SubMenu";
 
 function HeaderIcon(props) {
   let { type } = props;
@@ -28,8 +29,28 @@ function HeaderIcon(props) {
       return <ToolOutlined />;
   }
 }
+function MenuTreeNode(props: { menuItem: MenuType }) {
+  const { menuItem, ...rest } = props;
+  if (menuItem.children && menuItem.children.length > 0) {
+    return (
+      <SubMenu {...rest} title={menuItem.typeName} key={menuItem.id}>
+        {menuItem.children.map((item) => {
+          return <MenuTreeNode menuItem={item} key={item.id} />;
+        })}
+      </SubMenu>
+    );
+  } else {
+    return (
+      <Menu.Item {...rest} key={menuItem.id}>
+        <HeaderIcon type={menuItem.icon} />
+        {menuItem.typeName}
+      </Menu.Item>
+    );
+  }
+}
+
 const Header = (props: HeaderComponent) => {
-  const [navArray, setNavArray] = useState([]);
+  const [navArray, setNavArray] = useState<MenuType[]>([]);
   const INDEX_KEY = "-1";
   const [currentSelect, setCurrentSelect] = useState([INDEX_KEY]);
   function selectMenuByTypeName(data: MenuType[]) {
@@ -105,12 +126,7 @@ const Header = (props: HeaderComponent) => {
               <HomeOutlined /> 首页
             </Menu.Item>
             {navArray.map((item) => {
-              return (
-                <Menu.Item key={item.id}>
-                  <HeaderIcon type={item.icon} />
-                  {item.typeName}
-                </Menu.Item>
-              );
+              return <MenuTreeNode menuItem={item} key={item.id} />;
             })}
           </Menu>
         </Col>

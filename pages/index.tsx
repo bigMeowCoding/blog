@@ -14,7 +14,6 @@ import "highlight.js/styles/monokai-sublime.css";
 
 import "../static/styles/pages/index.css";
 import Author from "../components/Author";
-import Advert from "../components/Advert";
 import Footer from "../components/Footer";
 import * as axios from "axios";
 import Link from "next/link";
@@ -40,7 +39,6 @@ const Home = (list) => {
       return hljs.highlightAuto(code).value;
     },
   });
-  console.log(mylist);
   return (
     <>
       <Header />
