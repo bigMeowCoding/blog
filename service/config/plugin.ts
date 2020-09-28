@@ -1,4 +1,3 @@
-'use strict';
 
 /** @type Egg.EggPlugin */
 // module.exports = {
@@ -8,11 +7,11 @@
 // }
 // };
 
-exports.mysql = {
+export const mysql = {
     enable: true,
     package: 'egg-mysql'
 }
-exports.cors = {
+export const cors = {
     enable: true,
     package: 'egg-cors'
 }

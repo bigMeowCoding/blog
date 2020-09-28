@@ -26,7 +26,7 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon  --title=egg-server-service",
+    "start": "egg-scripts --port=7002 start    --daemon  --title=egg-server-service",
     "stop": "egg-scripts stop --title=egg-server-service",
     "dev": "egg-bin dev --port=7002",
     "debug": "egg-bin debug --port=7002 ",
@@ -34,6 +34,7 @@
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
     "lint": "eslint .",
+    "tsc": "ets && tsc -p tsconfig.json",
     "ci": "npm run lint && npm run cov",
     "autod": "autod"
   },

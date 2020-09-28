@@ -1,4 +1,4 @@
-module.exports = (app) => {
+export default  (app) => {
     const {router, controller} = app;
     router.get('/default/getArticleList', controller.default.home.getArticleList)
     router.get('/default/getArticleById/:id', controller.default.home.getArticleById)

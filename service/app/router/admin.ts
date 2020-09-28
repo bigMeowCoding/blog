@@ -1,4 +1,4 @@
-module.exports = (app) => {
+export default (app) => {
     const {router, controller} = app;
     const adminauth = app.middleware.adminauth();
     router.get('/admin/index', controller.admin.main.index);

@@ -1,12 +1,11 @@
-const defaultRouter = require('./router/default');
-const adminRouter = require('./router/admin');
+import defaultRouter from "./router/default";
+import adminRouter from "./router/admin";
 
-'use strict';
 
 /**
  * @param {Egg.Application} app - egg application
  */
-module.exports = app => {
+module.exports = (app) => {
   defaultRouter(app);
-  adminRouter(app)
+  adminRouter(app);
 };
