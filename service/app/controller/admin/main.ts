@@ -24,10 +24,6 @@ class MainController extends Controller {
       //登录成功,进行session缓存
       let openId = new Date().getTime();
       this.ctx.session.openId = { openId: openId };
-      this.ctx.session = {
-        domain: "127.0.0.1:3000",
-        httpOnly: false,
-      };
       this.ctx.body = { data: "登录成功", openId: openId };
     } else {
       this.ctx.body = { data: "登录失败" };
