@@ -20,10 +20,12 @@ function Login(props) {
             message.error('密码不能为空')
             return false
         }
+
         let dataProps = {
             'userName': userName,
             'password': password
         }
+
         axios({
             method: 'post',
             url: servicePath.checkLogin,
@@ -51,7 +53,7 @@ function Login(props) {
         <div className="login-div">
 
             <Spin tip="Loading..." spinning={isLoading}>
-                <Card title="JSPang Blog  System" bordered={true} style={{width: 400}}>
+                <Card title="BigMeow Blog System" bordered={true} style={{width: 400}}>
                     <Input
                         id="userName"
                         size="large"
