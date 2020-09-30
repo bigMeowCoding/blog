@@ -10,7 +10,7 @@ import {
 
 const Author = () => {
   return (
-    <div className="author-box common-box">
+    <div className="author-box">
       <div>
         <Avatar size={100} src="/images/headIcon.jpeg" />
       </div>
