@@ -1,4 +1,4 @@
-import '../static/styles/components/advert.css'
+import '../static/styles/components/advert.scss'
 
 const Advert = ()=>{
     return (

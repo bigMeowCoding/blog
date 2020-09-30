@@ -45,76 +45,76 @@ const MyList = (list) => {
   return (
     <>
       <Header typeId={list.typeId} />
-      <Row className="main-content" justify="center">
-        <Col
-          className="main-content-left"
-          xs={mainPageLeftGridConfig.xs}
-          sm={mainPageLeftGridConfig.sm}
-          md={mainPageLeftGridConfig.md}
-          lg={mainPageLeftGridConfig.lg}
-          xl={mainPageLeftGridConfig.xl}
-        >
-          {" "}
-          <div>
-            <div className="bread-div">
-              <Breadcrumb>
-                <Breadcrumb.Item>
-                  <a href="/">首页</a>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item>视频列表</Breadcrumb.Item>
-              </Breadcrumb>
-            </div>
-            <List
-              header={<div>最新日志</div>}
-              itemLayout="vertical"
-              dataSource={mylist}
-              renderItem={(item: any) => (
-                <List.Item>
-                  <div className="list-title">
-                    <Link
-                      href={{
-                        pathname: "/detail",
-                        query: { id: item.id, typeId: list.typeId },
+      <div className="main-content">
+        <Row justify="center">
+          <Col
+            className="main-content-left"
+            xs={mainPageLeftGridConfig.xs}
+            sm={mainPageLeftGridConfig.sm}
+            md={mainPageLeftGridConfig.md}
+          >
+            {" "}
+            <div>
+              <div className="bread-div">
+                <Breadcrumb>
+                  <Breadcrumb.Item>
+                    <a href="/">首页</a>
+                  </Breadcrumb.Item>
+                  <Breadcrumb.Item>视频列表</Breadcrumb.Item>
+                </Breadcrumb>
+              </div>
+              <List
+                header={<div>最新日志</div>}
+                itemLayout="vertical"
+                dataSource={mylist}
+                renderItem={(item: any) => (
+                  <List.Item>
+                    <div className="list-title">
+                      <Link
+                        href={{
+                          pathname: "/detail",
+                          query: { id: item.id, typeId: list.typeId },
+                        }}
+                      >
+                        <a>{item.title}</a>
+                      </Link>
+                    </div>
+                    <div className="list-icon">
+                      <span>
+                        <CalendarOutlined />
+                        {item.addTime}
+                      </span>
+                      <span>
+                        <FolderOpenOutlined /> {item.typeName}
+                      </span>
+                      <span>
+                        <FireOutlined />
+                        {item.view_count}人
+                      </span>
+                    </div>
+                    <div
+                      className="list-context"
+                      dangerouslySetInnerHTML={{
+                        __html: marked(item.introduce),
                       }}
-                    >
-                      <a>{item.title}</a>
-                    </Link>
-                  </div>
-                  <div className="list-icon">
-                    <span>
-                      <CalendarOutlined />
-                      {item.addTime}
-                    </span>
-                    <span>
-                      <FolderOpenOutlined /> {item.typeName}
-                    </span>
-                    <span>
-                      <FireOutlined />
-                      {item.view_count}人
-                    </span>
-                  </div>
-                  <div
-                    className="list-context"
-                    dangerouslySetInnerHTML={{ __html: marked(item.introduce) }}
-                  ></div>
-                </List.Item>
-              )}
-            />
-          </div>
-        </Col>
+                    ></div>
+                  </List.Item>
+                )}
+              />
+            </div>
+          </Col>
 
-        <Col
-          className="main-content-right"
-          xs={mainPageRightGridConfig.xs}
-          sm={mainPageRightGridConfig.sm}
-          md={mainPageRightGridConfig.md}
-          lg={mainPageRightGridConfig.lg}
-          xl={mainPageRightGridConfig.xl}
-        >
-          {" "}
-          <Author />
-        </Col>
-      </Row>
+          <Col
+            className="main-content-right"
+            xs={mainPageRightGridConfig.xs}
+            sm={mainPageRightGridConfig.sm}
+            md={mainPageRightGridConfig.md}
+          >
+            {" "}
+            <Author />
+          </Col>
+        </Row>
+      </div>
       <Footer />
     </>
   );

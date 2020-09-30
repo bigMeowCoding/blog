@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Router from "next/router";
 
-import "../static/styles/components/header.css";
+import "../static/styles/components/header.scss";
 import { Col, Menu, Row } from "antd";
 import {
   HomeOutlined,
@@ -96,41 +96,39 @@ const Header = (props: HeaderComponent) => {
 
   return (
     <div className="header">
-      <Row justify="center">
-        <Col
-          xs={headerLeftGridConfig.xs}
-          sm={headerLeftGridConfig.sm}
-          md={headerLeftGridConfig.md}
-          lg={headerLeftGridConfig.lg}
-          xl={headerLeftGridConfig.xl}
-        >
-          <a href="/">
-            <span className="header-title">BigMeowCoding</span>
-          </a>
-          <span className="header-introduce">健康生活，快乐编程</span>
-        </Col>
-        <Col
-          className="menu-box"
-          xs={headerRightGridConfig.xs}
-          sm={headerRightGridConfig.sm}
-          md={headerRightGridConfig.md}
-          lg={headerRightGridConfig.lg}
-          xl={headerRightGridConfig.xl}
-        >
-          <Menu
-            mode="horizontal"
-            selectedKeys={currentSelect}
-            onClick={handleClick}
+      <div className="header-content">
+        <Row justify="center">
+          <Col
+              xs={headerLeftGridConfig.xs}
+              sm={headerLeftGridConfig.sm}
+              md={headerLeftGridConfig.md}
           >
-            <Menu.Item key={INDEX_KEY}>
-              <HomeOutlined /> 首页
-            </Menu.Item>
-            {navArray.map((item) => {
-              return <MenuTreeNode menuItem={item} key={item.id} />;
-            })}
-          </Menu>
-        </Col>
-      </Row>
+            <a href="/">
+              <span className="header-title">BigMeowCoding</span>
+            </a>
+            <span className="header-introduce">健康生活，快乐编程</span>
+          </Col>
+          <Col
+              className="menu-box"
+              xs={headerRightGridConfig.xs}
+              sm={headerRightGridConfig.sm}
+              md={headerRightGridConfig.md}
+          >
+            <Menu
+                mode="horizontal"
+                selectedKeys={currentSelect}
+                onClick={handleClick}
+            >
+              <Menu.Item key={INDEX_KEY}>
+                <HomeOutlined /> 首页
+              </Menu.Item>
+              {navArray.map((item) => {
+                return <MenuTreeNode menuItem={item} key={item.id} />;
+              })}
+            </Menu>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 };

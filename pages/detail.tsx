@@ -14,7 +14,7 @@ import "highlight.js/styles/monokai-sublime.css";
 import Author from "../components/Author";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import "../static/styles/pages/detail.css";
+import "../static/styles/pages/detail.scss";
 import * as axios from "axios";
 
 import Tocify from "../components/tocify";
@@ -49,66 +49,64 @@ const Detail = (props: { typeId?: number; [key: string]: any }) => {
   return (
     <>
       <Header typeName={typeName} typeId={typeId} />
-      <Row className="main-content" justify="center">
-        <Col
-          className="main-content-left"
-          xs={mainPageLeftGridConfig.xs}
-          sm={mainPageLeftGridConfig.sm}
-          md={mainPageLeftGridConfig.md}
-          lg={mainPageLeftGridConfig.lg}
-          xl={mainPageLeftGridConfig.xl}
-        >
-          <div>
-            {/*<div className="bread-box">*/}
-            {/*<Breadcrumb>*/}
-            {/*<Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>*/}
-            {/*<Breadcrumb.Item>视频列表</Breadcrumb.Item>*/}
-            {/*<Breadcrumb.Item>xxxx</Breadcrumb.Item>*/}
-            {/*</Breadcrumb>*/}
-            {/*</div>*/}
-
+      <div className="main-content">
+        <Row justify="center">
+          <Col
+            className="main-content-left"
+            xs={mainPageLeftGridConfig.xs}
+            sm={mainPageLeftGridConfig.sm}
+            md={mainPageLeftGridConfig.md}
+          >
             <div>
-              <div className="detail-title">{props.title}</div>
+              {/*<div className="bread-box">*/}
+              {/*<Breadcrumb>*/}
+              {/*<Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>*/}
+              {/*<Breadcrumb.Item>视频列表</Breadcrumb.Item>*/}
+              {/*<Breadcrumb.Item>xxxx</Breadcrumb.Item>*/}
+              {/*</Breadcrumb>*/}
+              {/*</div>*/}
 
-              <div className="list-icon center">
-                <span>
-                  <CalendarOutlined />
-                  {props.addTime}
-                </span>
-                <span>
-                  <FolderOpenOutlined /> {props.typeName}
-                </span>
-                <span>
-                  <FireOutlined />
-                  {props.view_count}人
-                </span>
+              <div>
+                <div className="detail-title">{props.title}</div>
+
+                <div className="list-icon center">
+                  <span>
+                    <CalendarOutlined />
+                    {props.addTime}
+                  </span>
+                  <span>
+                    <FolderOpenOutlined /> {props.typeName}
+                  </span>
+                  <span>
+                    <FireOutlined />
+                    {props.view_count}人
+                  </span>
+                </div>
+
+                <div
+                  className="detail-content"
+                  dangerouslySetInnerHTML={{ __html: html }}
+                ></div>
               </div>
-
-              <div
-                className="detail-content"
-                dangerouslySetInnerHTML={{ __html: html }}
-              ></div>
             </div>
-          </div>
-        </Col>
+          </Col>
 
-        <Col
-          className="main-content-right"
-          xs={mainPageRightGridConfig.xs}
-          sm={mainPageRightGridConfig.sm}
-          md={mainPageRightGridConfig.md}
-          lg={mainPageRightGridConfig.lg}
-          xl={mainPageRightGridConfig.xl}
-        >
-          <Author />
-          <Affix offsetTop={5}>
-            <div className="detailed-nav common-box">
-              <div className="nav-title">文章目录</div>
-              <div className="toc-list">{tocify && tocify.render()}</div>
-            </div>
-          </Affix>
-        </Col>
-      </Row>
+          <Col
+            className="main-content-right"
+            xs={mainPageRightGridConfig.xs}
+            sm={mainPageRightGridConfig.sm}
+            md={mainPageRightGridConfig.md}
+          >
+            <Author />
+            <Affix offsetTop={5}>
+              <div className="detailed-nav common-box">
+                <div className="nav-title">文章目录</div>
+                <div className="toc-list">{tocify && tocify.render()}</div>
+              </div>
+            </Affix>
+          </Col>
+        </Row>
+      </div>
       <Footer />
     </>
   );

@@ -12,7 +12,7 @@ import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
 
-import "../static/styles/pages/index.css";
+import "../static/styles/pages/index.scss";
 import Author from "../components/Author";
 import Footer from "../components/Footer";
 import * as axios from "axios";
@@ -42,66 +42,64 @@ const Home = (list) => {
   return (
     <>
       <Header />
-      <Row className="main-content" justify="center">
-        <Col
-          className="main-content-left"
-          xs={mainPageLeftGridConfig.xs}
-          sm={mainPageLeftGridConfig.sm}
-          md={mainPageLeftGridConfig.md}
-          lg={mainPageLeftGridConfig.lg}
-          xl={mainPageLeftGridConfig.xl}
-        >
-          <div>
-            <List
-              header={<div>最新日志</div>}
-              itemLayout="vertical"
-              dataSource={mylist}
-              renderItem={(item: any) => (
-                <List.Item>
-                  <div className="list-title">
-                    <Link
-                      href={{
-                        pathname: "/detail",
-                        query: { id: item.id, typeName: item.typeName },
-                      }}
-                    >
-                      <a>{item.title}</a>
-                    </Link>
-                  </div>
-                  <div className="list-icon">
+      <div className="main-content">
+        <Row  justify="center">
+          <Col
+              className="main-content-left"
+              xs={mainPageLeftGridConfig.xs}
+              sm={mainPageLeftGridConfig.sm}
+              md={mainPageLeftGridConfig.md}
+          >
+            <div>
+              <List
+                  header={<div>最新日志</div>}
+                  itemLayout="vertical"
+                  dataSource={mylist}
+                  renderItem={(item: any) => (
+                      <List.Item>
+                        <div className="list-title">
+                          <Link
+                              href={{
+                                pathname: "/detail",
+                                query: { id: item.id, typeName: item.typeName },
+                              }}
+                          >
+                            <a>{item.title}</a>
+                          </Link>
+                        </div>
+                        <div className="list-icon">
                     <span>
                       <CalendarOutlined />
                       {item.addTime}
                     </span>
-                    <span>
+                          <span>
                       <FolderOpenOutlined /> {item.typeName}
                     </span>
-                    <span>
+                          <span>
                       <FireOutlined />
-                      {item.view_count}人
+                            {item.view_count}人
                     </span>
-                  </div>
-                  <div
-                    className="list-context"
-                    dangerouslySetInnerHTML={{ __html: marked(item.introduce) }}
-                  ></div>
-                </List.Item>
-              )}
-            />
-          </div>
-        </Col>
+                        </div>
+                        <div
+                            className="list-context"
+                            dangerouslySetInnerHTML={{ __html: marked(item.introduce) }}
+                        ></div>
+                      </List.Item>
+                  )}
+              />
+            </div>
+          </Col>
 
-        <Col
-          className="main-content-right"
-          xs={mainPageRightGridConfig.xs}
-          sm={mainPageRightGridConfig.sm}
-          md={mainPageRightGridConfig.md}
-          lg={mainPageRightGridConfig.lg}
-          xl={mainPageRightGridConfig.xl}
-        >
-          <Author />
-        </Col>
-      </Row>
+          <Col
+              className="main-content-right"
+              xs={mainPageRightGridConfig.xs}
+              sm={mainPageRightGridConfig.sm}
+              md={mainPageRightGridConfig.md}
+          >
+            <Author />
+          </Col>
+        </Row>
+      </div>
       <Footer />
     </>
   );

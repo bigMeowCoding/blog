@@ -1,4 +1,4 @@
-import '../static/styles/components/footer.css'
+import '../static/styles/components/footer.scss'
 const Footer = ()=>(
     <div className="footer-box">
         <div>系统由 React+Node+Ant Desgin驱动 </div>
