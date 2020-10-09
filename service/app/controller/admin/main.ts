@@ -41,6 +41,7 @@ class MainController extends Controller {
   async addArticle() {
     let tmpArticle = this.ctx.request.body;
     // tmpArticle.
+    // @ts-ignore
     const result = await this.app.mysql.insert("article", tmpArticle);
     const insertSuccess = result.affectedRows === 1;
     const insertId = result.insertId;
@@ -55,9 +56,9 @@ class MainController extends Controller {
   async updateArticle() {
     let tmpArticle = this.ctx.request.body;
 
+    // @ts-ignore
     const result = await this.app.mysql.update("article", tmpArticle);
     const updateSuccess = result.affectedRows === 1;
-    console.log(updateSuccess);
     this.ctx.body = {
       isScuccess: updateSuccess,
     };
@@ -74,12 +75,14 @@ class MainController extends Controller {
       "FROM article LEFT JOIN type ON article.type_id = type.Id " +
       "ORDER BY article.id DESC ";
 
+    // @ts-ignore
     const resList = await this.app.mysql.query(sql);
     this.ctx.body = { list: resList };
   }
 
   async delArticle() {
     let id = this.ctx.params.id;
+    // @ts-ignore
     const res = await this.app.mysql.delete("article", { id: id });
     this.ctx.body = { data: res };
   }
@@ -100,6 +103,7 @@ class MainController extends Controller {
       "FROM article LEFT JOIN type ON article.type_id = type.Id " +
       "WHERE article.id=" +
       id;
+    // @ts-ignore
     const result = await this.app.mysql.query(sql);
     this.ctx.body = { data: result };
   }
