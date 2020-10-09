@@ -1,6 +1,6 @@
 "use strict";
 
-const Controller = require("egg").Controller;
+import { Controller } from "egg";
 
 class MainController extends Controller {
   async index() {
@@ -19,6 +19,7 @@ class MainController extends Controller {
       password +
       "'";
 
+    // @ts-ignore
     const res = await this.app.mysql.query(sql);
     if (res.length > 0) {
       //登录成功,进行session缓存
@@ -32,6 +33,7 @@ class MainController extends Controller {
 
   //后台文章分类信息
   async getTypeInfo() {
+    // @ts-ignore
     const resType = await this.app.mysql.select("type");
     this.ctx.body = { data: resType };
   }
