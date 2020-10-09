@@ -22,6 +22,5 @@
     "inlineSourceMap": true,
     "importHelpers": true
   },
-  "exclude": ["app/public", "app/views", "node_modules*"],
-  "extends": "../tsconfig.base.json"
+  "exclude": ["app/public", "app/web", "app/views"]
 }
