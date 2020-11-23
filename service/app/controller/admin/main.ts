@@ -1,6 +1,7 @@
 "use strict";
 
 import { Controller } from "egg";
+import { createPlaceHolderImage } from "./createPlaceHolderImage";
 
 class MainController extends Controller {
   async index() {
@@ -75,16 +76,29 @@ class MainController extends Controller {
       "WHERE article_image.id=" +
       id;
     // @ts-ignore
-    const result = await this.app.mysql.query(sql);
+    const result = await this.app.mysql.query(sql).catch(() => {
+      const { type, stream } = createPlaceHolderImage();
+      this.ctx.response.type = type;
+      this.ctx.body = stream;
+      return;
+    });
     if (result && result.length) {
       const image = result[0];
       let { content } = image;
-      content = content.replace(/^data:image\/\w+;base64,/, ""); //去掉base64位头部
+      const reg = /^data:image\/(\w+);base64,/;
+      let type = "image/png";
+      const regArr = reg.exec(content);
+      if (regArr && regArr[1]) {
+        type = "image/" + regArr[1];
+      }
+      content = content.replace(reg, ""); //去掉base64位头部
       const imageBufferData = Buffer.from(content, "base64");
-      this.ctx.response.type = "image/png";
+      this.ctx.response.type = type;
       this.ctx.body = imageBufferData;
     } else {
-      this.ctx.body = [];
+      const { type, stream } = createPlaceHolderImage();
+      this.ctx.response.type = type;
+      this.ctx.body = stream;
     }
   }
 
