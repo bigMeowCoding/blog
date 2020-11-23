@@ -79,11 +79,13 @@ class MainController extends Controller {
     const images = await this.getArticleImagesByArticleId(articleId);
     for (const image of images) {
       // @ts-ignore
-      await this.app.mysql.delete("article_image", { id: image.id }).catch((e) => {
-        this.ctx.body = {
-          data: e,
-        };
-      });
+      await this.app.mysql
+        .delete("article_image", { id: image.id })
+        .catch((e) => {
+          this.ctx.body = {
+            data: e,
+          };
+        });
     }
     this.ctx.body = { data: "删除文章关联图片成功" };
   }
@@ -170,7 +172,7 @@ class MainController extends Controller {
     let id = this.ctx.params.id;
     // @ts-ignore
     const res = await this.app.mysql.delete("article", { id: id });
-     await this.delArticleImageByArticleId(id);
+    await this.delArticleImageByArticleId(id);
     this.ctx.body = { data: res };
   }
 
