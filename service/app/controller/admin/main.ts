@@ -38,15 +38,22 @@ class MainController extends Controller {
     const resType = await this.app.mysql.select("type");
     this.ctx.body = { data: resType };
   }
+
   // 增加文章
   async addArticle() {
     let tmpArticle = this.ctx.request.body;
-    // tmpArticle.
+
     // @ts-ignore
     const result = await this.app.mysql.insert("article", tmpArticle);
     const insertSuccess = result.affectedRows === 1;
     const insertId = result.insertId;
-
+    const images = await this.getArticleImagesByArticleId(0);
+    for (const image of images) {
+      // @ts-ignore
+      image.articleId = insertId;
+      // @ts-ignore
+      await this.app.mysql.update("article_image", image);
+    }
     this.ctx.body = {
       isScuccess: insertSuccess,
       insertId: insertId,
@@ -65,6 +72,20 @@ class MainController extends Controller {
       isSuccess: insertSuccess,
       insertId: insertId,
     };
+  }
+  // 增加文章图片
+  async delArticleImageByArticleId(articleId: number) {
+    // @ts-ignore
+    const images = await this.getArticleImagesByArticleId(articleId);
+    for (const image of images) {
+      // @ts-ignore
+      await this.app.mysql.delete("article_image", { id: image.id }).catch((e) => {
+        this.ctx.body = {
+          data: e,
+        };
+      });
+    }
+    this.ctx.body = { data: "删除文章关联图片成功" };
   }
   // 查找文章图片
   async getArticleImage() {
@@ -102,10 +123,25 @@ class MainController extends Controller {
     }
   }
 
+  async getArticleImagesByArticleId(articleId: number) {
+    let sql =
+      "SELECT article_image.id as id," +
+      "article_image.content as content " +
+      "FROM article_image " +
+      "WHERE article_image.articleId=" +
+      articleId;
+    // @ts-ignore
+    const result = await this.app.mysql.query(sql);
+    if (result && result.length) {
+      return Array.from(result);
+    } else {
+      return [];
+    }
+  }
+
   //修改文章
   async updateArticle() {
     let tmpArticle = this.ctx.request.body;
-
     // @ts-ignore
     const result = await this.app.mysql.update("article", tmpArticle);
     const updateSuccess = result.affectedRows === 1;
@@ -134,6 +170,7 @@ class MainController extends Controller {
     let id = this.ctx.params.id;
     // @ts-ignore
     const res = await this.app.mysql.delete("article", { id: id });
+     await this.delArticleImageByArticleId(id);
     this.ctx.body = { data: res };
   }
 

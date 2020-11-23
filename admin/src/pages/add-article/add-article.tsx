@@ -1,18 +1,17 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import marked from "marked";
 import { Row, Col, Input, Select, Button, message, DatePicker } from "antd";
 import "./add-article.scss";
-import servicePath, {ipUrl} from "../../common/config/apiUrl";
+import servicePath from "../../common/config/apiUrl";
 import axios, { AxiosResponse } from "axios";
-import {Article, ArticleImage} from "../../interface/article";
+import { Article } from "../../interface/article";
 import { fileToBase64 } from "../../common/utils/fileToBase64";
-import { HttpReturn, InsertReturn } from "../../interface/http";
+import { InsertReturn } from "../../interface/http";
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 function AddArticle(props: any) {
-  let typeValue = null;
   const [articleId, setArticleId] = useState(0); // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
   const [articleTitle, setArticleTitle] = useState(""); //文章标题
   const [articleContent, setArticleContent] = useState(""); //markdown的编辑内容
@@ -20,9 +19,9 @@ function AddArticle(props: any) {
   const [introducemd, setIntroducemd] = useState(""); //简介的markdown内容
   const [introducehtml, setIntroducehtml] = useState("等待编辑"); //简介的html内容
   const [showDate, setShowDate] = useState(""); //发布日期
-  // const [updateDate, setUpdateDate] = useState(); //修改日志的日期
   const [selectedType, setSelectType] = useState(0); //选择的文章类别
   const [typeInfo, setTypeInfo] = useState<any[]>([]); // 文章类别信息
+
   useEffect(() => {
     getTypeInfo();
     //获得文章ID
@@ -34,15 +33,7 @@ function AddArticle(props: any) {
   }, []);
 
   useEffect(() => {
-    // setTimeout(() => {
     setSelectType(typeInfo[0] && typeInfo[0].id);
-    // defaultValue = typeInfo[0] && typeInfo[1].id
-
-    // console.log('effect',defaultValue )
-    //
-    // })
-    // console.log()
-    // console.log(selectedType)
   }, [typeInfo]);
 
   marked.setOptions({
@@ -179,35 +170,20 @@ function AddArticle(props: any) {
         servicePath.addArticleImage,
         {
           content: base64,
+          articleId
         },
         {
           withCredentials: true,
         }
       )
       .then(
-        (d:AxiosResponse<InsertReturn>) => {
+        (d: AxiosResponse<InsertReturn>) => {
           return d;
         },
         (error) => {
           console.error(error);
         }
       );
-  }
-
-  function getArticleImage<T>(imageData: AxiosResponse<InsertReturn>) {
-    axios
-        .get(`${servicePath.getArticleImage}/${imageData.data.insertId}`,{
-          withCredentials: true,
-          headers: { "Access-Control-Allow-Origin": "*" },
-        })
-        .then(
-            (res:AxiosResponse<ArticleImage>) => {
-              console.log(res)
-            },
-            (error) => {
-              console.error(error);
-            }
-        );
   }
 
   const pasteChangeHandle: (e: React.ClipboardEvent) => void = async (e) => {
@@ -218,9 +194,7 @@ function AddArticle(props: any) {
         const base64 = await fileToBase64(file);
         const addImageStatus = await addArticleImage(base64);
         if (addImageStatus) {
-          // const image = await getArticleImage(addImageStatus);
-           const imageUrl = `![avatar](${servicePath.getArticleImage}/${addImageStatus.data.insertId})`;
-          console.log(imageUrl)
+          const imageUrl = `![avatar](${servicePath.getArticleImage}/${addImageStatus.data.insertId})`;
           changeArticleContent(articleContent + imageUrl);
         }
       }
