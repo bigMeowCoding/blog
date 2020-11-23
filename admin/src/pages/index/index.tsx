@@ -9,15 +9,14 @@ import ArticleList from "../article-list/articleList";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-function AdminIndex(props) {
+function AdminIndex(props:any) {
   const [collapsed, setCollapsed] = useState(false);
 
-  const onCollapse = (collapsed) => {
+  const onCollapse = (collapsed:boolean) => {
     setCollapsed(collapsed);
   };
 
-  const handleClickArticle = (e) => {
-    console.log(e.item.props);
+  const handleClickArticle = (e:any) => {
     if (e.key == "addArticle") {
       props.history.push("/index/add");
     } else {
@@ -39,7 +38,7 @@ function AdminIndex(props) {
           </Menu.Item>
           <SubMenu
             key="sub1"
-            onClick={handleClickArticle}
+            onTitleClick={handleClickArticle}
             title={
               <span>
                 {/*<Icon type="user"/>*/}

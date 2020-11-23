@@ -37,7 +37,7 @@ class MainController extends Controller {
     const resType = await this.app.mysql.select("type");
     this.ctx.body = { data: resType };
   }
-
+  // 增加文章
   async addArticle() {
     let tmpArticle = this.ctx.request.body;
     // tmpArticle.
@@ -50,6 +50,42 @@ class MainController extends Controller {
       isScuccess: insertSuccess,
       insertId: insertId,
     };
+  }
+
+  // 增加文章图片
+  async addArticleImage() {
+    let tmpImage = this.ctx.request.body;
+    // @ts-ignore
+    const result = await this.app.mysql.insert("article_image", tmpImage);
+    const insertSuccess = result.affectedRows === 1;
+    const insertId = result.insertId;
+
+    this.ctx.body = {
+      isSuccess: insertSuccess,
+      insertId: insertId,
+    };
+  }
+  // 查找文章图片
+  async getArticleImage() {
+    let id = this.ctx.params.id;
+    let sql =
+      "SELECT article_image.id as id," +
+      "article_image.content as content " +
+      "FROM article_image " +
+      "WHERE article_image.id=" +
+      id;
+    // @ts-ignore
+    const result = await this.app.mysql.query(sql);
+    if (result && result.length) {
+      const image = result[0];
+      let { content } = image;
+      content = content.replace(/^data:image\/\w+;base64,/, ""); //去掉base64位头部
+      const imageBufferData = Buffer.from(content, "base64");
+      this.ctx.response.type = "image/png";
+      this.ctx.body = imageBufferData;
+    } else {
+      this.ctx.body = [];
+    }
   }
 
   //修改文章

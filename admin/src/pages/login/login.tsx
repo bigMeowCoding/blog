@@ -4,9 +4,9 @@ import axios from 'axios';
 import './login.scss'
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import KeyOutlined from "@ant-design/icons/lib/icons/KeyOutlined";
-import servicePath from "../../config/apiUrl";
+import servicePath from "../../common/config/apiUrl";
 
-function Login(props) {
+function Login(props:any) {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -34,7 +34,7 @@ function Login(props) {
         }).then(
             res => {
                 setIsLoading(false)
-                if (res.data.data == '登录成功') {
+                if (res.data.data === '登录成功') {
                     localStorage.setItem('openId', res.data.openId)
                     props.history.push('/index')
                 } else {
