@@ -2,6 +2,7 @@
 
 import { Controller } from "egg";
 import { createPlaceHolderImage } from "./createPlaceHolderImage";
+import { ArticleImage } from "../../../../admin/src/interface/article";
 
 class MainController extends Controller {
   async index() {
@@ -125,7 +126,9 @@ class MainController extends Controller {
     }
   }
 
-  async getArticleImagesByArticleId(articleId: number) {
+  async getArticleImagesByArticleId(
+    articleId: number
+  ): Promise<ArticleImage[]> {
     let sql =
       "SELECT article_image.id as id," +
       "article_image.content as content " +
@@ -133,7 +136,7 @@ class MainController extends Controller {
       "WHERE article_image.articleId=" +
       articleId;
     // @ts-ignore
-    const result = await this.app.mysql.query(sql);
+    const result: ArticleImage[] = await this.app.mysql.query(sql);
     if (result && result.length) {
       return Array.from(result);
     } else {
