@@ -28,17 +28,8 @@ function AdminIndex(props:any) {
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-          <Menu.Item key="1">
-            {/*<Icon type="pie-chart"/>*/}
-            <span>工作台</span>
-          </Menu.Item>
-          <Menu.Item key="2">
-            {/*<Icon type="desktop"/>*/}
-            <span>添加文章</span>
-          </Menu.Item>
           <SubMenu
             key="sub1"
-            onTitleClick={handleClickArticle}
             title={
               <span>
                 {/*<Icon type="user"/>*/}
@@ -46,14 +37,10 @@ function AdminIndex(props:any) {
               </span>
             }
           >
-            <Menu.Item key="addArticle">添加文章</Menu.Item>
-            <Menu.Item key="articleList">文章列表</Menu.Item>
+            <Menu.Item key="addArticle" onClick={handleClickArticle}>添加文章</Menu.Item>
+            <Menu.Item key="articleList" onClick={handleClickArticle}>文章列表</Menu.Item>
           </SubMenu>
 
-          <Menu.Item key="9">
-            {/*<Icon type="file"/>*/}
-            <span>留言管理</span>
-          </Menu.Item>
         </Menu>
       </Sider>
       <Layout>
@@ -72,7 +59,7 @@ function AdminIndex(props:any) {
             </div>
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>JSPang.com</Footer>
+        <Footer style={{ textAlign: "center" }}>bigmeow.com</Footer>
       </Layout>
     </Layout>
   );
