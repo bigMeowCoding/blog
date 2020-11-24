@@ -9,14 +9,14 @@ import ArticleList from "../article-list/articleList";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-function AdminIndex(props:any) {
+function AdminIndex(props: any) {
   const [collapsed, setCollapsed] = useState(false);
 
-  const onCollapse = (collapsed:boolean) => {
+  const onCollapse = (collapsed: boolean) => {
     setCollapsed(collapsed);
   };
 
-  const handleClickArticle = (e:any) => {
+  const handleClickArticle = (e: any) => {
     if (e.key == "addArticle") {
       props.history.push("/index/add");
     } else {
@@ -37,10 +37,13 @@ function AdminIndex(props:any) {
               </span>
             }
           >
-            <Menu.Item key="addArticle" onClick={handleClickArticle}>添加文章</Menu.Item>
-            <Menu.Item key="articleList" onClick={handleClickArticle}>文章列表</Menu.Item>
+            <Menu.Item key="addArticle" onClick={handleClickArticle}>
+              添加文章
+            </Menu.Item>
+            <Menu.Item key="articleList" onClick={handleClickArticle}>
+              文章列表
+            </Menu.Item>
           </SubMenu>
-
         </Menu>
       </Sider>
       <Layout>
