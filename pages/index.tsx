@@ -22,6 +22,7 @@ import {
   mainPageLeftGridConfig,
   mainPageRightGridConfig,
 } from "../config/baseConfig";
+import Particles from "react-particles-js";
 
 const Home = (list) => {
   const [mylist, setMylist] = useState(list.data);
@@ -41,60 +42,91 @@ const Home = (list) => {
   });
   return (
     <>
+      <div className="particles-wrapper">
+        <Particles
+          params={{
+            particles: {
+              number: {
+                value: 50,
+              },
+              size: {
+                value: 3,
+              },
+              line_linked: {
+                color: "#ddd",
+              },
+              color: {
+                value: "#000",
+              },
+            },
+            interactivity: {
+              events: {
+                onhover: {
+                  enable: true,
+                  mode: "repulse",
+                },
+              },
+            },
+          }}
+        />
+      </div>
+
       <Header />
       <div className="main-content">
-        <Row  justify="center">
+        <Row justify="center">
           <Col
-              className="main-content-left"
-              xs={mainPageLeftGridConfig.xs}
-              sm={mainPageLeftGridConfig.sm}
-              md={mainPageLeftGridConfig.md}
+            className="main-content-left"
+            xs={mainPageLeftGridConfig.xs}
+            sm={mainPageLeftGridConfig.sm}
+            md={mainPageLeftGridConfig.md}
           >
             <div>
               <List
-                  header={<div>最新日志</div>}
-                  itemLayout="vertical"
-                  dataSource={mylist}
-                  renderItem={(item: any) => (
-                      <List.Item>
-                        <div className="list-title">
-                          <Link
-                              href={{
-                                pathname: "/detail",
-                                query: { id: item.id, typeName: item.typeName },
-                              }}
-                          >
-                            <a>{item.title}</a>
-                          </Link>
-                        </div>
-                        <div className="list-icon">
-                    <span>
-                      <CalendarOutlined />
-                      {item.addTime}
-                    </span>
-                          <span>
-                      <FolderOpenOutlined /> {item.typeName}
-                    </span>
-                          <span>
-                      <FireOutlined />
-                            {item.view_count}人
-                    </span>
-                        </div>
-                        <div
-                            className="list-context"
-                            dangerouslySetInnerHTML={{ __html: marked(item.introduce) }}
-                        ></div>
-                      </List.Item>
-                  )}
+                header={<div>最新日志</div>}
+                itemLayout="vertical"
+                dataSource={mylist}
+                renderItem={(item: any) => (
+                  <List.Item>
+                    <div className="list-title">
+                      <Link
+                        href={{
+                          pathname: "/detail",
+                          query: { id: item.id, typeName: item.typeName },
+                        }}
+                      >
+                        <a>{item.title}</a>
+                      </Link>
+                    </div>
+                    <div className="list-icon">
+                      <span>
+                        <CalendarOutlined />
+                        {item.addTime}
+                      </span>
+                      <span>
+                        <FolderOpenOutlined /> {item.typeName}
+                      </span>
+                      <span>
+                        <FireOutlined />
+                        {item.view_count}人
+                      </span>
+                    </div>
+                    <div
+                      className="list-context"
+                      dangerouslySetInnerHTML={{
+                        __html: marked(item.introduce),
+                      }}
+                    ></div>
+                  </List.Item>
+                )}
               />
             </div>
           </Col>
 
           <Col
-              className="main-content-right"
-              xs={mainPageRightGridConfig.xs}
-              sm={mainPageRightGridConfig.sm}
-              md={mainPageRightGridConfig.md}
+            className="main-content-right"
+            xs={mainPageRightGridConfig.xs}
+            sm={mainPageRightGridConfig.sm}
+            md={mainPageRightGridConfig.md}
           >
             <Author />
           </Col>
