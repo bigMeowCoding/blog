@@ -1,30 +1,34 @@
 import { Button, Col, List, Row, Modal, message } from "antd";
-import axios from "axios";
-import React, { FC, useEffect, useState } from "react";
+import axios, { AxiosResponse } from "axios";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import servicePath from "../../common/config/apiUrl";
 
 import "./articleList.scss";
 import { useHistory } from "react-router-dom";
+import { Article } from "../../interface/article";
 
 const { confirm } = Modal;
 
 const ArticleList: FC = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<Article[]>([]);
   const history = useHistory();
 
-  useEffect(() => {
-    getList();
+  const setArticleList = useCallback(async () => {
+    const res: AxiosResponse<{ list: Article[] }> = await getList();
+    setList(res.data.list);
   }, []);
+
+  useEffect(() => {
+    setArticleList().catch((e) => {
+      console.error(e);
+    });
+  }, [setArticleList]);
 
   //得到文章列表
   const getList = () => {
-    axios({
-      method: "get",
-      url: servicePath.getArticleList,
+    return axios.get(servicePath.getArticleList, {
       withCredentials: true,
       headers: { "Access-Control-Allow-Origin": "*" },
-    }).then((res) => {
-      setList(res.data.list);
     });
   };
 
@@ -37,7 +41,9 @@ const ArticleList: FC = () => {
         axios(servicePath.delArticle + id, { withCredentials: true }).then(
           () => {
             message.success("文章删除成功");
-            getList();
+            setArticleList().catch((e) => {
+              console.error(e);
+            });
           }
         );
       },

@@ -25,6 +25,7 @@ const AdminIndex: FC = () => {
       history.push("/index/list");
     }
   };
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
