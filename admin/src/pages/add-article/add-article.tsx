@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  FC,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import marked from "marked";
 import { Row, Col, Input, Select, Button, message, DatePicker } from "antd";
 import "./add-article.scss";
@@ -7,11 +13,16 @@ import axios, { AxiosResponse } from "axios";
 import { Article } from "../../interface/article";
 import { fileToBase64 } from "../../common/utils/fileToBase64";
 import { InsertReturn } from "../../interface/http";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 const { Option } = Select;
 const { TextArea } = Input;
 
-function AddArticle(props: any) {
+const AddArticle: FC = () => {
+  // const { id } = useParams();
+  let match = useRouteMatch<{ id: string }>("/index/add/:id");
+  let params = match && match.params;
+  const history = useHistory();
   const [articleId, setArticleId] = useState(0); // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
   const [articleTitle, setArticleTitle] = useState(""); //文章标题
   const [articleContent, setArticleContent] = useState(""); //markdown的编辑内容
@@ -22,15 +33,33 @@ function AddArticle(props: any) {
   const [selectedType, setSelectType] = useState(0); //选择的文章类别
   const [typeInfo, setTypeInfo] = useState<any[]>([]); // 文章类别信息
 
+  //从中台得到文章类别信息
+  const getTypeInfo = useCallback(() => {
+    axios({
+      method: "get",
+      url: servicePath.getTypeInfo,
+      headers: { "Access-Control-Allow-Origin": "*" },
+      withCredentials: true,
+    }).then((res) => {
+      if (res.data.data === "没有登录") {
+        localStorage.removeItem("openId");
+        history.push("/");
+      } else {
+        setTypeInfo(res.data.data);
+      }
+    });
+  }, [history]);
+
   useEffect(() => {
     getTypeInfo();
     //获得文章ID
-    let tmpId = props.match.params.id;
-    if (tmpId) {
-      setArticleId(tmpId);
-      getArticleById(tmpId);
+    if (params && params.id) {
+      const { id } = params,
+        idNumber = parseInt(id, 10);
+      setArticleId(idNumber);
+      getArticleById(idNumber);
     }
-  }, []);
+  }, [params, getTypeInfo]);
 
   useEffect(() => {
     setSelectType(typeInfo[0] && typeInfo[0].id);
@@ -65,22 +94,6 @@ function AddArticle(props: any) {
   //选择类别后的便哈
   const selectTypeHandler = (value: any) => {
     setSelectType(value);
-  };
-  //从中台得到文章类别信息
-  const getTypeInfo = () => {
-    axios({
-      method: "get",
-      url: servicePath.getTypeInfo,
-      headers: { "Access-Control-Allow-Origin": "*" },
-      withCredentials: true,
-    }).then((res) => {
-      if (res.data.data === "没有登录") {
-        localStorage.removeItem("openId");
-        props.history.push("/");
-      } else {
-        setTypeInfo(res.data.data);
-      }
-    });
   };
 
   const saveArticle = () => {
@@ -170,7 +183,7 @@ function AddArticle(props: any) {
         servicePath.addArticleImage,
         {
           content: base64,
-          articleId
+          articleId,
         },
         {
           withCredentials: true,
@@ -251,7 +264,7 @@ function AddArticle(props: any) {
               <div
                 className="show-html"
                 dangerouslySetInnerHTML={{ __html: markdownContent }}
-              ></div>
+              />
             </Col>
           </Row>
         </Col>
@@ -282,7 +295,7 @@ function AddArticle(props: any) {
                 dangerouslySetInnerHTML={{
                   __html: "文章简介：" + introducehtml,
                 }}
-              ></div>
+              />
             </Col>
 
             <Col span={12}>
@@ -299,6 +312,6 @@ function AddArticle(props: any) {
       </Row>
     </div>
   );
-}
+};
 
 export default AddArticle;

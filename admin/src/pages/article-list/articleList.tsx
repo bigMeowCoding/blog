@@ -1,14 +1,16 @@
 import { Button, Col, List, Row, Modal, message } from "antd";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import servicePath from "../../common/config/apiUrl";
 
 import "./articleList.scss";
+import { useHistory } from "react-router-dom";
 
 const { confirm } = Modal;
 
-function ArticleList(props: any) {
+const ArticleList: FC = () => {
   const [list, setList] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     getList();
@@ -33,7 +35,7 @@ function ArticleList(props: any) {
       content: "如果你点击OK按钮，文章将会永远被删除，无法恢复。",
       onOk() {
         axios(servicePath.delArticle + id, { withCredentials: true }).then(
-          (res) => {
+          () => {
             message.success("文章删除成功");
             getList();
           }
@@ -44,9 +46,10 @@ function ArticleList(props: any) {
       },
     });
   };
+
   //修改文章
   const updateArticle = (id: number) => {
-    props.history.push("/index/add/" + id);
+    history.push("/index/add/" + id);
   };
 
   return (
@@ -112,6 +115,6 @@ function ArticleList(props: any) {
       />
     </div>
   );
-}
+};
 
 export default ArticleList;

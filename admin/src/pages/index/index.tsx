@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import "./index.scss";
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import AddArticle from "../add-article/add-article";
 import ArticleList from "../article-list/articleList";
+import { MenuInfo } from "rc-menu/es/interface";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-function AdminIndex(props: any) {
+const AdminIndex: FC = () => {
+  const history = useHistory();
   const [collapsed, setCollapsed] = useState(false);
 
   const onCollapse = (collapsed: boolean) => {
     setCollapsed(collapsed);
   };
 
-  const handleClickArticle = (e: any) => {
-    if (e.key == "addArticle") {
-      props.history.push("/index/add");
+  const handleClickArticle = (e: MenuInfo) => {
+    if (e.key === "addArticle") {
+      history.push("/index/add");
     } else {
-      props.history.push("/index/list");
+      history.push("/index/list");
     }
   };
   return (
@@ -32,7 +34,6 @@ function AdminIndex(props: any) {
             key="sub1"
             title={
               <span>
-                {/*<Icon type="user"/>*/}
                 <span>文章管理</span>
               </span>
             }
@@ -66,6 +67,6 @@ function AdminIndex(props: any) {
       </Layout>
     </Layout>
   );
-}
+};
 
 export default AdminIndex;
