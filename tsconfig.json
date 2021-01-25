@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "baseUrl": ".",
+    "baseUrl": "./",
+    "paths": {
+      "@styles/*": ["./styles/*"],
+      "@libs/*": ["./libs/*"]
+
+    },
     "target": "es5",
     "sourceMap": true,
     "lib": ["dom", "dom.iterable", "esnext"],

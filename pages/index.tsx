@@ -12,7 +12,7 @@ import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
 
-import "../static/styles/pages/index.scss";
+// import "@styles/pages/index.scss";
 import Author from "../components/Author";
 import Footer from "../components/Footer";
 import * as axios from "axios";

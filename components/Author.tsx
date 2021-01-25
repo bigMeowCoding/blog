@@ -1,5 +1,5 @@
 import { Avatar, Tooltip, Divider } from "antd";
-import "../static/styles/components/author.scss";
+// import "./author.scss";
 
 import {
   GithubOutlined,

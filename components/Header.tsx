@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Router from "next/router";
 
-import "../static/styles/components/header.scss";
+// import "./header.scss";
 import { Col, Menu, Row } from "antd";
 import {
   HomeOutlined,
@@ -84,7 +84,6 @@ const Header = (props: HeaderComponent) => {
   }, []);
 
   const handleClick = (e) => {
-    console.log(e.key);
     if (e.key === String(INDEX_KEY)) {
       setCurrentSelect([INDEX_KEY]);
       Router.push("/index");
