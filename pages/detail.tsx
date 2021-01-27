@@ -5,7 +5,7 @@ import {
   FolderOpenOutlined,
   FireOutlined,
 } from "@ant-design/icons";
-import { Affix, Breadcrumb, Col, Row } from "antd";
+import { Affix, Col, Row } from "antd";
 import "markdown-navbar/dist/navbar.css";
 import marked from "marked";
 import hljs from "highlight.js";
@@ -14,7 +14,7 @@ import "highlight.js/styles/monokai-sublime.css";
 import Author from "../components/Author";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import "../static/styles/pages/detail.scss";
+// import "../static/styles/pages/detail.scss";
 import * as axios from "axios";
 
 import Tocify from "../components/tocify";

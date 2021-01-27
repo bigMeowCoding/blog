@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "@/components/header/Header";
 import React, { useState } from "react";
 
 import { Col, Row, List } from "antd";
@@ -12,9 +12,9 @@ import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
 
-// import "@styles/pages/index.scss";
-import Author from "../components/Author";
-import Footer from "../components/Footer";
+import style from "./index.scss";
+import Author from "@/components/author/Author";
+import Footer from "@/components/footer/Footer";
 import * as axios from "axios";
 import Link from "next/link";
 import servicePath from "../config/apiUrl";
@@ -42,35 +42,6 @@ const Home = (list) => {
   });
   return (
     <>
-      <div className="particles-wrapper">
-        <Particles
-          params={{
-            particles: {
-              number: {
-                value: 50,
-              },
-              size: {
-                value: 3,
-              },
-              line_linked: {
-                color: "#ddd",
-              },
-              color: {
-                value: "#000",
-              },
-            },
-            interactivity: {
-              events: {
-                onhover: {
-                  enable: true,
-                  mode: "repulse",
-                },
-              },
-            },
-          }}
-        />
-      </div>
-
       <Header />
       <div className="main-content">
         <Row justify="center">
@@ -115,7 +86,7 @@ const Home = (list) => {
                       dangerouslySetInnerHTML={{
                         __html: marked(item.introduce),
                       }}
-                    ></div>
+                    />
                   </List.Item>
                 )}
               />

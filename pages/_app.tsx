@@ -1,7 +1,8 @@
 import { AppProps } from "next/app";
 
 import "antd/dist/antd.css";
-import "@styles/pages/common.scss";
+import "tailwindcss/tailwind.css";
+import "@styles/common.scss";
 import Head from "next/head";
 import React from "react";
 export default function MyApp({ Component, pageProps }: AppProps) {

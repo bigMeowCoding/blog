@@ -1,4 +1,4 @@
-//@import "libs/styles/variables/index.scss";
+@import "styles/variables/index.scss";
 
 .header {
   background-color: #fff;
@@ -6,30 +6,30 @@
   overflow: hidden;
   height: 3.2rem;
   border-bottom: 1px solid #eee;
-  .header-content {
+  .header_content {
     max-width: $content-width;
     margin: 0 auto;
   }
 }
 
-.header-title {
+.header_title {
   color: #1e90ff;
   font-size: 1.4rem;
   text-align: left;
 }
 
-.header-introduce {
+.header_introduce {
   font-size: 0.6rem;
   color: #999;
   display: inline-block;
   padding-left: 0.3rem;
 }
 
-.ant-meu {
+.ant_meu {
   line-height: 2.8rem;
 }
 
-.ant-menu-item {
+.ant_menu_item {
   font-size: 1rem !important;
   padding-left: 1rem;
   padding-right: 1rem;

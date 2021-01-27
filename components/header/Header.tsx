@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Router from "next/router";
 
-// import "./header.scss";
+import style from "./header.module.scss";
 import { Col, Menu, Row } from "antd";
 import {
   HomeOutlined,
@@ -10,12 +10,12 @@ import {
   ToolOutlined,
 } from "@ant-design/icons";
 import * as axios from "axios";
-import servicePath from "../config/apiUrl";
+import servicePath from "@/config/apiUrl";
 import {
   headerLeftGridConfig,
   headerRightGridConfig,
-} from "../config/baseConfig";
-import { HeaderComponent, MenuType } from "../libs/interface";
+} from "@/config/baseConfig";
+import { HeaderComponent, MenuType } from "@libs/interface";
 import SubMenu from "antd/lib/menu/SubMenu";
 
 function HeaderIcon(props) {
@@ -94,29 +94,29 @@ const Header = (props: HeaderComponent) => {
   };
 
   return (
-    <div className="header">
-      <div className="header-content">
+    <div className={style.header}>
+      <div className={style.header_content}>
         <Row justify="center">
           <Col
-              xs={headerLeftGridConfig.xs}
-              sm={headerLeftGridConfig.sm}
-              md={headerLeftGridConfig.md}
+            xs={headerLeftGridConfig.xs}
+            sm={headerLeftGridConfig.sm}
+            md={headerLeftGridConfig.md}
           >
             <a href="/">
-              <span className="header-title">BigMeowCoding</span>
+              <span className={style.header_title}>BigMeowCoding</span>
             </a>
-            <span className="header-introduce">健康生活，快乐编程</span>
+            <span className={style.header_introduce}>健康生活，快乐编程</span>
           </Col>
           <Col
-              className="menu-box"
-              xs={headerRightGridConfig.xs}
-              sm={headerRightGridConfig.sm}
-              md={headerRightGridConfig.md}
+            className="menu-box"
+            xs={headerRightGridConfig.xs}
+            sm={headerRightGridConfig.sm}
+            md={headerRightGridConfig.md}
           >
             <Menu
-                mode="horizontal"
-                selectedKeys={currentSelect}
-                onClick={handleClick}
+              mode="horizontal"
+              selectedKeys={currentSelect}
+              onClick={handleClick}
             >
               <Menu.Item key={INDEX_KEY}>
                 <HomeOutlined /> 首页
