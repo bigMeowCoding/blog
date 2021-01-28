@@ -8,7 +8,5 @@ export interface MenuType {
 }
 
 export interface HeaderComponent {
-  typeId?: number;
-  typeName?: string;
-  [key: string]: any;
+
 }

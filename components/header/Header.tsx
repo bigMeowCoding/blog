@@ -15,7 +15,7 @@ import {
   headerLeftGridConfig,
   headerRightGridConfig,
 } from "@/config/baseConfig";
-import { HeaderComponent, MenuType } from "@libs/interface";
+import { MenuType } from "@libs/interface";
 import SubMenu from "antd/lib/menu/SubMenu";
 import { MenuClickEventHandler } from "rc-menu/lib/interface";
 
@@ -50,14 +50,17 @@ const MenuTreeNode: FC<{ menuItem: MenuType }> = ({ menuItem, ...rest }) => {
   }
 };
 
-const Header = (props: HeaderComponent) => {
+const Header: FC<{
+  typeId?: number;
+  typeName?: string;
+}> = ({ typeId, typeName }) => {
   const [navArray, setNavArray] = useState<MenuType[]>([]);
   const INDEX_KEY = "-1";
   const [currentSelect, setCurrentSelect] = useState<string[]>([INDEX_KEY]);
   function selectMenuByTypeName(data: MenuType[]) {
-    if (props.typeName) {
+    if (typeName) {
       const menu = data.find((item) => {
-        return item.typeName === props.typeName;
+        return item.typeName === typeName;
       });
       if (menu) {
         setTimeout(() => {
@@ -81,7 +84,7 @@ const Header = (props: HeaderComponent) => {
         });
       setNavArray(result);
       setTimeout(() => {
-        setCurrentSelect([props.typeId ? String(props.typeId) : INDEX_KEY]);
+        setCurrentSelect([typeId ? String(typeId) : INDEX_KEY]);
       });
     };
     fetchData().then((r) => r);

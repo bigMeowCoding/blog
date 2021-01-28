@@ -1,5 +1,5 @@
 import Header from "@/components/header/Header";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 
 import { Col, Row, List } from "antd";
 import {
@@ -13,16 +13,18 @@ import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
 import Author from "@/components/author/Author";
 import Footer from "@/components/footer/Footer";
-import * as axios from "axios";
+import axios from "axios";
 import Link from "next/link";
 import servicePath from "../config/apiUrl";
 import {
   mainPageLeftGridConfig,
   mainPageRightGridConfig,
 } from "@/config/baseConfig";
+import { GetServerSideProps } from "next";
+import { ArticleListItem } from "@/pages/types/article";
 
-const Home = (list: any) => {
-  const [myList] = useState(list.data);
+const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
+  const [myList] = useState(list);
   const renderer = new marked.Renderer();
   marked.setOptions({
     renderer: renderer,
@@ -52,7 +54,7 @@ const Home = (list: any) => {
                 header={<div>最新日志</div>}
                 itemLayout="vertical"
                 dataSource={myList}
-                renderItem={(item: any) => (
+                renderItem={(item: ArticleListItem) => (
                   <List.Item>
                     <div className="list-title">
                       <Link
@@ -103,14 +105,14 @@ const Home = (list: any) => {
     </>
   );
 };
-Home.getInitialProps = async () => {
-  const promise = new Promise((resolve) => {
-    // @ts-ignore
-    axios(servicePath.getArticleList).then((res) => {
-      resolve(res.data);
-    });
-  });
-
-  return await promise;
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await axios.get<{
+    data: ArticleListItem[];
+  }>(servicePath.getArticleList);
+  return {
+    props: {
+      list: res.data.data,
+    },
+  };
 };
 export default Home;
