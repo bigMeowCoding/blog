@@ -1,5 +1,5 @@
-import Header from "../components/Header";
-import React, { useEffect, useState } from "react";
+import Header from "@/components/header/Header";
+import React, { FC, useEffect, useState } from "react";
 
 import { Col, Row, List, Breadcrumb } from "antd";
 import {
@@ -8,9 +8,9 @@ import {
   FireOutlined,
 } from "@ant-design/icons";
 
-import Author from "../components/Author";
-import Footer from "../components/Footer";
-import * as axios from "axios";
+import Author from "@/components/author/Author";
+import Footer from "@/components/footer/Footer";
+import axios from "axios";
 import servicePath from "../config/apiUrl";
 import Link from "next/link";
 import "markdown-navbar/dist/navbar.css";
@@ -20,21 +20,25 @@ import "highlight.js/styles/monokai-sublime.css";
 import {
   mainPageLeftGridConfig,
   mainPageRightGridConfig,
-} from "../config/baseConfig";
+} from "@/config/baseConfig";
+import { GetServerSideProps } from "next";
+import { ArticleListItem } from "@/pages/types/article";
 
-const MyList = (list) => {
-  const [mylist, setMylist] = useState(list.data);
+const MyList: FC<{ list: ArticleListItem[]; typeId: number }> = ({
+  list,
+  typeId,
+}) => {
+  const [myList, setMyList] = useState(list);
   const renderer = new marked.Renderer();
 
   useEffect(() => {
-    setMylist(list.data);
+    setMyList(list);
   });
   marked.setOptions({
     renderer: renderer,
     gfm: true,
     pedantic: false,
     sanitize: false,
-    tables: true,
     breaks: false,
     smartLists: true,
     smartypants: false,
@@ -44,7 +48,7 @@ const MyList = (list) => {
   });
   return (
     <>
-      <Header typeId={list.typeId} />
+      <Header typeId={typeId} />
       <div className="main-content">
         <Row justify="center">
           <Col
@@ -66,14 +70,14 @@ const MyList = (list) => {
               <List
                 header={<div>最新日志</div>}
                 itemLayout="vertical"
-                dataSource={mylist}
+                dataSource={myList}
                 renderItem={(item: any) => (
                   <List.Item>
                     <div className="list-title">
                       <Link
                         href={{
                           pathname: "/detail",
-                          query: { id: item.id, typeId: list.typeId },
+                          query: { id: item.id, typeId: typeId },
                         }}
                       >
                         <a>{item.title}</a>
@@ -97,7 +101,7 @@ const MyList = (list) => {
                       dangerouslySetInnerHTML={{
                         __html: marked(item.introduce),
                       }}
-                    ></div>
+                    />
                   </List.Item>
                 )}
               />
@@ -119,17 +123,21 @@ const MyList = (list) => {
     </>
   );
 };
-MyList.getInitialProps = async (context) => {
-  let id = context.query.id;
-  const promise = new Promise((resolve) => {
-    // @ts-ignore
-    axios(servicePath.getListById + "/" + id).then((res) =>
-      resolve({
-        ...res.data,
-        typeId: id,
-      })
-    );
-  });
-  return await promise;
+export const getServerSideProps: GetServerSideProps<{
+  list: ArticleListItem[];
+  typeId: number;
+}> = async (context) => {
+  let queryId = context.query.id;
+  const id = typeof queryId === "string" ? parseInt(queryId) : -1;
+  const res = await axios.get<{ data: ArticleListItem[] }>(
+      servicePath.getListById + "/" + queryId
+    ),
+    list = res.data.data;
+  return {
+    props: {
+      list,
+      typeId: id,
+    },
+  };
 };
 export default MyList;
