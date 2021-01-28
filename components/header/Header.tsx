@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Router from "next/router";
 
 import style from "./header.module.scss";
@@ -9,7 +9,7 @@ import {
   SmileOutlined,
   ToolOutlined,
 } from "@ant-design/icons";
-import * as axios from "axios";
+import axios from "axios";
 import servicePath from "@/config/apiUrl";
 import {
   headerLeftGridConfig,
@@ -17,9 +17,9 @@ import {
 } from "@/config/baseConfig";
 import { HeaderComponent, MenuType } from "@libs/interface";
 import SubMenu from "antd/lib/menu/SubMenu";
+import { MenuClickEventHandler } from "rc-menu/lib/interface";
 
-function HeaderIcon(props) {
-  let { type } = props;
+const HeaderIcon: FC<{ type: number }> = ({ type }) => {
   switch (type) {
     case 1:
       return <YoutubeOutlined />;
@@ -27,8 +27,10 @@ function HeaderIcon(props) {
       return <SmileOutlined />;
     case 3:
       return <ToolOutlined />;
+    default:
+      return null;
   }
-}
+};
 function MenuTreeNode(props: { menuItem: MenuType }) {
   const { menuItem, ...rest } = props;
   if (menuItem.children && menuItem.children.length > 0) {
@@ -52,7 +54,7 @@ function MenuTreeNode(props: { menuItem: MenuType }) {
 const Header = (props: HeaderComponent) => {
   const [navArray, setNavArray] = useState<MenuType[]>([]);
   const INDEX_KEY = "-1";
-  const [currentSelect, setCurrentSelect] = useState([INDEX_KEY]);
+  const [currentSelect, setCurrentSelect] = useState<string[]>([INDEX_KEY]);
   function selectMenuByTypeName(data: MenuType[]) {
     if (props.typeName) {
       const menu = data.find((item) => {
@@ -68,28 +70,31 @@ const Header = (props: HeaderComponent) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // @ts-ignore
-      const result = await axios(servicePath.getTypeInfo).then((res) => {
-        const data: MenuType[] = res.data.data;
-        setNavArray(data);
-        selectMenuByTypeName(data);
-        return data;
-      });
+      const result = await axios
+        .get<{
+          data: MenuType[];
+        }>(servicePath.getTypeInfo)
+        .then((res) => {
+          const data = res.data.data;
+          setNavArray(data);
+          selectMenuByTypeName(data);
+          return data;
+        });
       setNavArray(result);
       setTimeout(() => {
         setCurrentSelect([props.typeId ? String(props.typeId) : INDEX_KEY]);
       });
     };
-    fetchData();
+    fetchData().then((r) => r);
   }, []);
 
-  const handleClick = (e) => {
+  const handleClick: MenuClickEventHandler = (e) => {
     if (e.key === String(INDEX_KEY)) {
       setCurrentSelect([INDEX_KEY]);
-      Router.push("/index");
+      Router.push("/index").then((r) => r);
     } else {
-      setCurrentSelect([e.key]);
-      Router.push("/list?id=" + e.key);
+      setCurrentSelect([e.key + ""]);
+      Router.push("/list?id=" + e.key).then((r) => r);
     }
   };
 
