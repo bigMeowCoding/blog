@@ -1,5 +1,4 @@
 import style from "./advert.module.scss";
-import { className } from "postcss-selector-parser";
 import classnames from "classnames";
 
 const Advert = () => {

@@ -11,8 +11,6 @@ import "markdown-navbar/dist/navbar.css";
 import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
-
-import style from "./index.scss";
 import Author from "@/components/author/Author";
 import Footer from "@/components/footer/Footer";
 import * as axios from "axios";
@@ -21,18 +19,16 @@ import servicePath from "../config/apiUrl";
 import {
   mainPageLeftGridConfig,
   mainPageRightGridConfig,
-} from "../config/baseConfig";
-import Particles from "react-particles-js";
+} from "@/config/baseConfig";
 
-const Home = (list) => {
-  const [mylist, setMylist] = useState(list.data);
+const Home = (list: any) => {
+  const [myList] = useState(list.data);
   const renderer = new marked.Renderer();
   marked.setOptions({
     renderer: renderer,
     gfm: true,
     pedantic: false,
     sanitize: false,
-    tables: true,
     breaks: false,
     smartLists: true,
     smartypants: false,
@@ -55,13 +51,13 @@ const Home = (list) => {
               <List
                 header={<div>最新日志</div>}
                 itemLayout="vertical"
-                dataSource={mylist}
+                dataSource={myList}
                 renderItem={(item: any) => (
                   <List.Item>
                     <div className="list-title">
                       <Link
                         href={{
-                          pathname: "/detail",
+                          pathname: `/detail/detail`,
                           query: { id: item.id, typeName: item.typeName },
                         }}
                       >

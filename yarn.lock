@@ -229,10 +229,22 @@
   resolved "https://registry.npm.taobao.org/@types/classnames/download/@types/classnames-2.2.11.tgz#2521cc86f69d15c5b90664e4829d84566052c1cf"
   integrity sha1-JSHMhvadFcW5BmTkgp2EVmBSwc8=
 
+"@types/highlightjs@^10.1.0":
+  version "10.1.0"
+  resolved "https://registry.npm.taobao.org/@types/highlightjs/download/@types/highlightjs-10.1.0.tgz#bf16135e3c736db053f026a1fa8ff3aa247ef5c1"
+  integrity sha1-vxYTXjxzbbBT8Cah+o/zqiR+9cE=
+  dependencies:
+    highlight.js "^10.1.0"
+
 "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.6":
   version "7.0.7"
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.7.tgz#98a993516c859eb0d5c4c8f098317a9ea68db9ad"
   integrity sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
+
+"@types/marked@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.npm.taobao.org/@types/marked/download/@types/marked-1.2.1.tgz?cache=0&sync_timestamp=1607025210795&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fmarked%2Fdownload%2F%40types%2Fmarked-1.2.1.tgz#9864ecc10d0edb72e7be4e94acb5fcc607c15eed"
+  integrity sha1-mGTswQ0O23Lnvk6UrLX8xgfBXu0=
 
 "@types/node@^14.11.1":
   version "14.14.22"
@@ -2312,6 +2324,11 @@ he@1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
+
+highlight.js@^10.1.0:
+  version "10.5.0"
+  resolved "https://registry.npm.taobao.org/highlight.js/download/highlight.js-10.5.0.tgz#3f09fede6a865757378f2d9ebdcbc15ba268f98f"
+  integrity sha1-Pwn+3mqGV1c3jy2evcvBW6Jo+Y8=
 
 highlight.js@^9.18.1:
   version "9.18.5"
