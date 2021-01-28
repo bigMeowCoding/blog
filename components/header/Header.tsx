@@ -31,8 +31,7 @@ const HeaderIcon: FC<{ type: number }> = ({ type }) => {
       return null;
   }
 };
-function MenuTreeNode(props: { menuItem: MenuType }) {
-  const { menuItem, ...rest } = props;
+const MenuTreeNode: FC<{ menuItem: MenuType }> = ({ menuItem, ...rest }) => {
   if (menuItem.children && menuItem.children.length > 0) {
     return (
       <SubMenu {...rest} title={menuItem.typeName} key={menuItem.id}>
@@ -49,7 +48,7 @@ function MenuTreeNode(props: { menuItem: MenuType }) {
       </Menu.Item>
     );
   }
-}
+};
 
 const Header = (props: HeaderComponent) => {
   const [navArray, setNavArray] = useState<MenuType[]>([]);
