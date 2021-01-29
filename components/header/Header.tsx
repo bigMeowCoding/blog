@@ -1,23 +1,15 @@
 import React, { FC, useEffect, useState } from "react";
-import Router from "next/router";
-
-import style from "./header.module.scss";
-import { Col, Menu, Row } from "antd";
+import { Menu } from "antd";
 import {
-  HomeOutlined,
   YoutubeOutlined,
   SmileOutlined,
   ToolOutlined,
 } from "@ant-design/icons";
 import axios from "axios";
 import servicePath from "@/config/apiUrl";
-import {
-  headerLeftGridConfig,
-  headerRightGridConfig,
-} from "@/config/baseConfig";
 import { MenuType } from "@libs/interface";
 import SubMenu from "antd/lib/menu/SubMenu";
-import { MenuClickEventHandler } from "rc-menu/lib/interface";
+import Link from "next/link";
 
 const HeaderIcon: FC<{ type: number }> = ({ type }) => {
   switch (type) {
@@ -56,16 +48,16 @@ const Header: FC<{
 }> = ({ typeId, typeName }) => {
   const [navArray, setNavArray] = useState<MenuType[]>([]);
   const INDEX_KEY = "-1";
-  const [currentSelect, setCurrentSelect] = useState<string[]>([INDEX_KEY]);
+  // const [currentSelect, setCurrentSelect] = useState<string[]>([INDEX_KEY]);
   function selectMenuByTypeName(data: MenuType[]) {
     if (typeName) {
       const menu = data.find((item) => {
         return item.typeName === typeName;
       });
       if (menu) {
-        setTimeout(() => {
-          setCurrentSelect([String(menu.id)] || [INDEX_KEY]);
-        });
+        // setTimeout(() => {
+        // setCurrentSelect([String(menu.id)] || [INDEX_KEY]);
+        // });
       }
     }
   }
@@ -90,50 +82,39 @@ const Header: FC<{
     fetchData().then((r) => r);
   }, []);
 
-  const handleClick: MenuClickEventHandler = (e) => {
-    if (e.key === String(INDEX_KEY)) {
-      setCurrentSelect([INDEX_KEY]);
-      Router.push("/index").then((r) => r);
-    } else {
-      setCurrentSelect([e.key + ""]);
-      Router.push("/list?id=" + e.key).then((r) => r);
-    }
-  };
+  // const handleClick: MenuClickEventHandler = (e) => {
+  //   if (e.key === String(INDEX_KEY)) {
+  //     setCurrentSelect([INDEX_KEY]);
+  //     Router.push("/index").then((r) => r);
+  //   } else {
+  //     setCurrentSelect([e.key + ""]);
+  //     Router.push("/list?id=" + e.key).then((r) => r);
+  //   }
+  // };
 
   return (
-    <div className={style.header}>
-      <div className={style.header_content}>
-        <Row justify="center">
-          <Col
-            xs={headerLeftGridConfig.xs}
-            sm={headerLeftGridConfig.sm}
-            md={headerLeftGridConfig.md}
-          >
-            <a href="/">
-              <span className={style.header_title}>BigMeowCoding</span>
-            </a>
-            <span className={style.header_introduce}>健康生活，快乐编程</span>
-          </Col>
-          <Col
-            className="menu-box"
-            xs={headerRightGridConfig.xs}
-            sm={headerRightGridConfig.sm}
-            md={headerRightGridConfig.md}
-          >
-            <Menu
-              mode="horizontal"
-              selectedKeys={currentSelect}
-              onClick={handleClick}
-            >
-              <Menu.Item key={INDEX_KEY}>
-                <HomeOutlined /> 首页
-              </Menu.Item>
-              {navArray.map((item) => {
-                return <MenuTreeNode menuItem={item} key={item.id} />;
-              })}
-            </Menu>
-          </Col>
-        </Row>
+    <div className="bg-white h-12 shadow-md">
+      <div className="container mx-auto h-full flex place-content-between items-center">
+        <div className="space-x-2 items-center">
+          <a className="text-2xl text-blue-500 inline-block h-full" href="/">
+            BigMeowCoding
+          </a>
+          <span className="text-sm text-gray-500 inline-block h-full">
+            健康生活，快乐编程
+          </span>
+        </div>
+        <div className="text-gray-600 flex space-x-4">
+          <Link href="/">
+            <a>首页</a>
+          </Link>
+          {navArray.map((item) => {
+            return (
+              <Link href="/" key={item.id}>
+                {item.typeName}
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

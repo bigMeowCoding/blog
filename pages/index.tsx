@@ -41,7 +41,7 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
   return (
     <>
       <Header />
-      <div className="main-content">
+      <div className="mx-auto main-content">
         <Row justify="center">
           <Col
             className="main-content-left"
