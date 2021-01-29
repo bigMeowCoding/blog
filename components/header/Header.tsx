@@ -45,9 +45,9 @@ const MenuTreeNode: FC<{ menuItem: MenuType }> = ({ menuItem, ...rest }) => {
 const Header: FC<{
   typeId?: number;
   typeName?: string;
-}> = ({ typeId, typeName }) => {
+}> = ({  typeName }) => {
   const [navArray, setNavArray] = useState<MenuType[]>([]);
-  const INDEX_KEY = "-1";
+  // const INDEX_KEY = "-1";
   // const [currentSelect, setCurrentSelect] = useState<string[]>([INDEX_KEY]);
   function selectMenuByTypeName(data: MenuType[]) {
     if (typeName) {
@@ -75,9 +75,9 @@ const Header: FC<{
           return data;
         });
       setNavArray(result);
-      setTimeout(() => {
-        setCurrentSelect([typeId ? String(typeId) : INDEX_KEY]);
-      });
+      // setTimeout(() => {
+      // setCurrentSelect([typeId ? String(typeId) : INDEX_KEY]);
+      // });
     };
     fetchData().then((r) => r);
   }, []);
