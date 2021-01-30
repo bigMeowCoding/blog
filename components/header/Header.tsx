@@ -10,6 +10,8 @@ import servicePath from "@/config/apiUrl";
 import { MenuType } from "@libs/interface";
 import SubMenu from "antd/lib/menu/SubMenu";
 import Link from "next/link";
+import classNames from "classnames";
+import {BLOG_NAME} from "@/config/baseConfig";
 
 const HeaderIcon: FC<{ type: number }> = ({ type }) => {
   switch (type) {
@@ -41,11 +43,11 @@ const MenuTreeNode: FC<{ menuItem: MenuType }> = ({ menuItem, ...rest }) => {
     );
   }
 };
-
-const Header: FC<{
+interface prop extends React.HTMLAttributes<HTMLElement> {
   typeId?: number;
   typeName?: string;
-}> = ({  typeName }) => {
+}
+const Header: FC<prop> = ({ typeName, className }) => {
   const [navArray, setNavArray] = useState<MenuType[]>([]);
   // const INDEX_KEY = "-1";
   // const [currentSelect, setCurrentSelect] = useState<string[]>([INDEX_KEY]);
@@ -93,15 +95,13 @@ const Header: FC<{
   // };
 
   return (
-    <div className="bg-white h-12 shadow-md">
+    <div className={classNames("bg-white h-12 ", className)}>
       <div className="container mx-auto h-full flex place-content-between items-center">
         <div className="space-x-2 items-center">
           <a className="text-2xl text-blue-500 inline-block h-full" href="/">
-            BigMeowCoding
+            {BLOG_NAME}
           </a>
-          <span className="text-sm text-gray-500 inline-block h-full">
-            健康生活，快乐编程
-          </span>
+
         </div>
         <div className="text-gray-600 flex space-x-4">
           <Link href="/">

@@ -12,6 +12,7 @@ import Link from "next/link";
 import servicePath from "../config/apiUrl";
 import { GetServerSideProps } from "next";
 import { ArticleListItem } from "@/pages/types/article";
+import { BLOG_NAME } from "@/config/baseConfig";
 
 const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
   const [myList] = useState(list);
@@ -30,9 +31,20 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
   });
   return (
     <>
-      <Header />
+      <Header className="bg-info-bg bg-no-repeat bg-cover absolute inset-x-0 top-0" />
+      <div className="bg-info-bg bg-no-repeat bg-cover">
+        <div className=" container mx-auto  mb-5">
+          <div className="py-40">
+            <h1 className="text-8xl text-white text-center font-bold font-serif mb-2">{BLOG_NAME}</h1>
+            <p className="text-2xl text-white text-center font-serif">
+              不要因为走得太远 而忘记为什么出发
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="mx-auto md:container">
-        <div className="mt-5">
+        <div className="">
           <div className="grid grid-cols-12">
             <div
               className="lg:col-span-8 lg:col-start-2
@@ -42,7 +54,7 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
               <h2 className="text-xl text-gray-400 mb-4">最新博客</h2>
               {myList.map((item) => {
                 return (
-                  <div>
+                  <div key={item.id}>
                     <div className="list-title">
                       <Link
                         href={{
@@ -57,7 +69,7 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
                     </div>
 
                     <div
-                      className="list-context"
+                      className="text-gray-500"
                       dangerouslySetInnerHTML={{
                         __html: marked(item.introduce),
                       }}

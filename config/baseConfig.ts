@@ -28,3 +28,5 @@ export const headerRightGridConfig = {
 };
 
 export const HeaderIndexType = "0";
+
+export const BLOG_NAME = '老喵 Blog'
