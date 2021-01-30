@@ -53,7 +53,6 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
            sm:col-span-12
             md:col-span-8 md:col-start-2"
             >
-              <h2 className="text-xl text-gray-400 mb-4">最新博客</h2>
               {myList.map((item) => {
                 return (
                   <div key={item.id}>
@@ -64,14 +63,14 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
                           query: { id: item.id, typeName: item.typeName },
                         }}
                       >
-                        <h3 className="text-lg mb-4 text-blue-400">
+                        <h3 className="text-2xl mb-4 font-bold text-gray-700">
                           {item.title}
                         </h3>
                       </Link>
                     </div>
 
                     <div
-                      className="text-gray-500"
+                      className="text-gray-400 text-sm font-serif italic"
                       dangerouslySetInnerHTML={{
                         __html: marked(item.introduce),
                       }}
