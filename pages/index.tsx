@@ -35,9 +35,11 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
       <div className="bg-info-bg bg-no-repeat bg-cover">
         <div className=" container mx-auto  mb-5">
           <div className="py-40">
-            <h1 className="text-8xl text-white text-center font-bold font-serif mb-2">{BLOG_NAME}</h1>
-            <p className="text-2xl text-white text-center font-serif">
-              不要因为走得太远 而忘记为什么出发
+            <h1 className="text-8xl text-white text-center font-bold  mb-2">
+              {BLOG_NAME}
+            </h1>
+            <p className="text-2xl text-white text-center ">
+              「不要因为走得太远 而忘记为什么出发」
             </p>
           </div>
         </div>

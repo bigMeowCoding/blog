@@ -11,7 +11,7 @@ import { MenuType } from "@libs/interface";
 import SubMenu from "antd/lib/menu/SubMenu";
 import Link from "next/link";
 import classNames from "classnames";
-import {BLOG_NAME} from "@/config/baseConfig";
+import { BLOG_NAME } from "@/config/baseConfig";
 
 const HeaderIcon: FC<{ type: number }> = ({ type }) => {
   switch (type) {
@@ -72,6 +72,9 @@ const Header: FC<prop> = ({ typeName, className }) => {
         }>(servicePath.getTypeInfo)
         .then((res) => {
           const data = res.data.data;
+          data.sort((a, b) => {
+            return a.orderNumber - b.orderNumber;
+          });
           setNavArray(data);
           selectMenuByTypeName(data);
           return data;
@@ -98,19 +101,18 @@ const Header: FC<prop> = ({ typeName, className }) => {
     <div className={classNames("bg-white h-12 ", className)}>
       <div className="container mx-auto h-full flex place-content-between items-center">
         <div className="space-x-2 items-center">
-          <a className="text-2xl text-blue-500 inline-block h-full" href="/">
+          <a
+            className="text-2xl hover:text-opacity-80 text-white font-extrabold inline-block h-full"
+            href="/"
+          >
             {BLOG_NAME}
           </a>
-
         </div>
         <div className="text-gray-600 flex space-x-4">
-          <Link href="/">
-            <a>首页</a>
-          </Link>
           {navArray.map((item) => {
             return (
               <Link href="/" key={item.id}>
-                {item.typeName}
+                <a className="font-extrabold hover:text-opacity-80 text-white text-xs">{item.typeName}</a>
               </Link>
             );
           })}
