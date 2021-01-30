@@ -1,12 +1,6 @@
 import Header from "@/components/header/Header";
 import React, { FC, useState } from "react";
 
-import { Col, Row, List } from "antd";
-import {
-  CalendarOutlined,
-  FolderOpenOutlined,
-  FireOutlined,
-} from "@ant-design/icons";
 import "markdown-navbar/dist/navbar.css";
 import marked from "marked";
 import hljs from "highlight.js";
@@ -16,10 +10,6 @@ import Footer from "@/components/footer/Footer";
 import axios from "axios";
 import Link from "next/link";
 import servicePath from "../config/apiUrl";
-import {
-  mainPageLeftGridConfig,
-  mainPageRightGridConfig,
-} from "@/config/baseConfig";
 import { GetServerSideProps } from "next";
 import { ArticleListItem } from "@/pages/types/article";
 
@@ -41,21 +31,18 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
   return (
     <>
       <Header />
-      <div className="mx-auto main-content">
-        <Row justify="center">
-          <Col
-            className="main-content-left"
-            xs={mainPageLeftGridConfig.xs}
-            sm={mainPageLeftGridConfig.sm}
-            md={mainPageLeftGridConfig.md}
-          >
-            <div>
-              <List
-                header={<div>最新日志</div>}
-                itemLayout="vertical"
-                dataSource={myList}
-                renderItem={(item: ArticleListItem) => (
-                  <List.Item>
+      <div className="mx-auto md:container">
+        <div className="mt-5">
+          <div className="grid grid-cols-12">
+            <div
+              className="lg:col-span-8 lg:col-start-2
+           sm:col-span-12
+            md:col-span-8 md:col-start-2"
+            >
+              <h2 className="text-xl text-gray-400 mb-4">最新博客</h2>
+              {myList.map((item) => {
+                return (
+                  <div>
                     <div className="list-title">
                       <Link
                         href={{
@@ -63,43 +50,27 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
                           query: { id: item.id, typeName: item.typeName },
                         }}
                       >
-                        <a>{item.title}</a>
+                        <h3 className="text-lg mb-4 text-blue-400">
+                          {item.title}
+                        </h3>
                       </Link>
                     </div>
-                    <div className="list-icon">
-                      <span>
-                        <CalendarOutlined />
-                        {item.addTime}
-                      </span>
-                      <span>
-                        <FolderOpenOutlined /> {item.typeName}
-                      </span>
-                      <span>
-                        <FireOutlined />
-                        {item.view_count}人
-                      </span>
-                    </div>
+
                     <div
                       className="list-context"
                       dangerouslySetInnerHTML={{
                         __html: marked(item.introduce),
                       }}
                     />
-                  </List.Item>
-                )}
-              />
+                  </div>
+                );
+              })}
             </div>
-          </Col>
-
-          <Col
-            className="main-content-right"
-            xs={mainPageRightGridConfig.xs}
-            sm={mainPageRightGridConfig.sm}
-            md={mainPageRightGridConfig.md}
-          >
-            <Author />
-          </Col>
-        </Row>
+            <div className="lg:col-span-3  sm:col-span-12 md:col-span-3">
+              <Author />
+            </div>
+          </div>
+        </div>
       </div>
       <Footer />
     </>
