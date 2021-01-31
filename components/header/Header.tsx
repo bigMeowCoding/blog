@@ -87,18 +87,8 @@ const Header: FC<prop> = ({ typeName, className }) => {
     fetchData().then((r) => r);
   }, []);
 
-  // const handleClick: MenuClickEventHandler = (e) => {
-  //   if (e.key === String(INDEX_KEY)) {
-  //     setCurrentSelect([INDEX_KEY]);
-  //     Router.push("/index").then((r) => r);
-  //   } else {
-  //     setCurrentSelect([e.key + ""]);
-  //     Router.push("/list?id=" + e.key).then((r) => r);
-  //   }
-  // };
-
   return (
-    <div className={classNames("bg-white h-12 ", className)}>
+    <div className={classNames("h-12 ", className)}>
       <div className="container mx-auto h-full flex place-content-between items-center">
         <div className="space-x-2 items-center">
           <a
@@ -111,8 +101,10 @@ const Header: FC<prop> = ({ typeName, className }) => {
         <div className="text-gray-600 flex space-x-4">
           {navArray.map((item) => {
             return (
-              <Link href="/" key={item.id}>
-                <a className="font-extrabold hover:text-opacity-80 text-white text-xs">{item.typeName}</a>
+              <Link href={item.id ? `/list?id=${item.id}` : "/"} key={item.id}>
+                <a className="font-extrabold hover:text-opacity-80 text-white text-xs">
+                  {item.typeName}
+                </a>
               </Link>
             );
           })}

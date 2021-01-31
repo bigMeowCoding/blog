@@ -31,14 +31,14 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
   });
   return (
     <>
-      <Header className="bg-info-bg bg-no-repeat bg-cover absolute inset-x-0 top-0" />
+      <Header className=" bg-no-repeat bg-cover absolute inset-x-0 top-0" />
       <div className="bg-info-bg bg-no-repeat bg-cover">
         <div className=" container mx-auto  mb-5">
           <div className="py-40">
             <h1 className="text-8xl text-white text-center font-bold  mb-2">
               {BLOG_NAME}
             </h1>
-            <p className="text-2xl text-white text-center ">
+            <p className="text-xl text-white text-center font-serif">
               「不要因为走得太远 而忘记为什么出发」
             </p>
           </div>
