@@ -1,4 +1,4 @@
-import { Avatar, Tooltip, Divider } from "antd";
+import { Avatar, Tooltip } from "antd";
 import style from "./author.module.scss";
 
 import {
@@ -10,14 +10,12 @@ import {
 
 const Author = () => {
   return (
-    <div className={style.author_box}>
-      <div>
-        <Avatar size={100} src="/images/headIcon.jpeg" />
+    <div className=''>
+      <div className='bg-head-icon bg-cover bg-no-repeat w-48 h-48'>
       </div>
-      <div className={style.name}>BigMeow</div>
-      <div className={style.description}>爱前端，更爱生活</div>
+      <p className='text-gray-300'>老喵，前端娱乐圈迟到者，切页面爱好者，计算机科学朝圣者</p>
+
       <div className={style.author_introduction}>
-        <Divider>社交账号</Divider>
         <Tooltip title="https://github.com/bigMeowCoding">
           <Avatar
             size={28}

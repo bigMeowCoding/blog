@@ -47,22 +47,8 @@ interface prop extends React.HTMLAttributes<HTMLElement> {
   typeId?: number;
   typeName?: string;
 }
-const Header: FC<prop> = ({ typeName, className }) => {
+const Header: FC<prop> = ({ className }) => {
   const [navArray, setNavArray] = useState<MenuType[]>([]);
-  // const INDEX_KEY = "-1";
-  // const [currentSelect, setCurrentSelect] = useState<string[]>([INDEX_KEY]);
-  function selectMenuByTypeName(data: MenuType[]) {
-    if (typeName) {
-      const menu = data.find((item) => {
-        return item.typeName === typeName;
-      });
-      if (menu) {
-        // setTimeout(() => {
-        // setCurrentSelect([String(menu.id)] || [INDEX_KEY]);
-        // });
-      }
-    }
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,13 +62,9 @@ const Header: FC<prop> = ({ typeName, className }) => {
             return a.orderNumber - b.orderNumber;
           });
           setNavArray(data);
-          selectMenuByTypeName(data);
           return data;
         });
       setNavArray(result);
-      // setTimeout(() => {
-      // setCurrentSelect([typeId ? String(typeId) : INDEX_KEY]);
-      // });
     };
     fetchData().then((r) => r);
   }, []);
