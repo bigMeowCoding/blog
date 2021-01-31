@@ -5,11 +5,13 @@ import Github from "../../public/images/icons/github.svg";
 const Author = () => {
   return (
     <div className="">
-      <div className="bg-head-icon bg-cover bg-no-repeat w-48 h-48" />
-      <p className="text-gray-300">
+      <h2 className="text-xl text-gray-400 font-bold mb-4">关于我</h2>
+      <div className="relative inline-block">
+        <div className="bg-head-icon bg-cover rounded-md bg-no-repeat w-48 h-48 mb-4" />
+      </div>
+      <p className="text-gray-300 mb-4  w-48">
         老喵，前端娱乐圈迟到者，切页面爱好者，计算机科学朝圣者
       </p>
-
       <div className="flex space-x-4">
         <div
           onClick={() => {
@@ -37,27 +39,6 @@ const Author = () => {
         >
           <Weibo fill="white" className=" w-6 h-6" />
         </div>
-
-        {/*<Tooltip title="">*/}
-        {/*  <Avatar*/}
-        {/*    size={28}*/}
-        {/*    icon={<GithubOutlined />}*/}
-        {/*    className={style.account}*/}
-        {/*  />*/}
-        {/*</Tooltip>*/}
-        {/*<Tooltip title="lygkd50822103">*/}
-        {/*  <Avatar*/}
-        {/*    size={28}*/}
-        {/*    icon={<WechatOutlined />}*/}
-        {/*    className={style.account}*/}
-        {/*  />*/}
-        {/*</Tooltip>*/}
-        {/*<Tooltip title="495248579">*/}
-        {/*  <Avatar size={28} icon={<QqOutlined />} className={style.account} />*/}
-        {/*</Tooltip>*/}
-        {/*<Tooltip title="zhou495248579@hotmail.com">*/}
-        {/*  <Avatar size={28} icon={<MailOutlined />} className={style.account} />*/}
-        {/*</Tooltip>*/}
       </div>
     </div>
   );
