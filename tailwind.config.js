@@ -7,6 +7,9 @@ module.exports = {
       backgroundImage: () => ({
         "info-bg": "url('/images/info-bg.jpg')",
         "head-icon": "url('/images/headIcon.png')",
+        "icon-email": "url('/images/icons/email.svg')",
+        "icon-github": "url('/images/icons/github.svg')",
+        "icon-wechat": "url('/images/icons/wechat.svg')",
       }),
     },
   },
