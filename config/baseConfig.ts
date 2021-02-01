@@ -32,7 +32,11 @@ export const bgInfoMap: {
   };
 } = {
   1: {
-    bg: "",
-    info: "没有华丽的外表，谁会欣赏我内在的风采",
+    bg: "bg-frontend-info",
+    info: "「没有华丽的外表，谁会欣赏我内在的风采」",
+  },
+  2: {
+    bg: "bg-base-info",
+    info: "「罗马不是一天建成的」",
   },
 };

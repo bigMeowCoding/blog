@@ -33,8 +33,7 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
   return (
     <>
       <Header className=" bg-no-repeat bg-cover absolute inset-x-0 top-0" />
-      <BgInfo title={BLOG_NAME} info='「不要因为走得太远 而忘记为什么出发」' />
-
+      <BgInfo title={BLOG_NAME} info='「不要因为走得太远 而忘记为什么出发」' className='bg-index-info'/>
       <div className="mx-auto md:container">
         <div>
           <div className="grid grid-cols-12">

@@ -5,7 +5,9 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: () => ({
-        "info-bg": "url('/images/info-bg.jpg')",
+        "index-info": "url('/images/info-bg.jpg')",
+        "frontend-info": "url('/images/frontend-info-bg.png')",
+        "base-info": "url('/images/base-info-bg.png')",
         "head-icon": "url('/images/headIcon.png')",
         "icon-email": "url('/images/icons/email.svg')",
         "icon-github": "url('/images/icons/github.svg')",
