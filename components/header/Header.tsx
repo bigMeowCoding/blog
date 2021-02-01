@@ -83,7 +83,7 @@ const Header: FC<prop> = ({ className }) => {
         <div className="text-gray-600 flex space-x-4">
           {navArray.map((item) => {
             return (
-              <Link href={item.id ? `/list?id=${item.id}` : "/"} key={item.id}>
+              <Link href={item.id ? `/list/list?id=${item.id}` : "/"} key={item.id}>
                 <a className="font-extrabold hover:text-opacity-80 text-white text-xs">
                   {item.typeName}
                 </a>

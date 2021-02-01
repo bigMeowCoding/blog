@@ -13,6 +13,7 @@ import servicePath from "../config/apiUrl";
 import { GetServerSideProps } from "next";
 import { ArticleListItem } from "@/pages/types/article";
 import { BLOG_NAME } from "@/config/baseConfig";
+import BgInfo from "@/components/bg-info/bg-info";
 
 const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
   const [myList] = useState(list);
@@ -32,18 +33,7 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
   return (
     <>
       <Header className=" bg-no-repeat bg-cover absolute inset-x-0 top-0" />
-      <div className="bg-info-bg bg-no-repeat bg-cover">
-        <div className=" container mx-auto  mb-5">
-          <div className="py-40">
-            <h1 className="text-8xl text-white text-center font-bold  mb-2">
-              {BLOG_NAME}
-            </h1>
-            <p className="text-xl text-white text-center font-serif">
-              「不要因为走得太远 而忘记为什么出发」
-            </p>
-          </div>
-        </div>
-      </div>
+      <BgInfo title={BLOG_NAME} info='「不要因为走得太远 而忘记为什么出发」' />
 
       <div className="mx-auto md:container">
         <div>

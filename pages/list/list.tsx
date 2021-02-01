@@ -11,23 +11,26 @@ import {
 import Author from "@/components/author/Author";
 import Footer from "@/components/footer/Footer";
 import axios from "axios";
-import servicePath from "../config/apiUrl";
+import servicePath from "@/config/apiUrl";
 import Link from "next/link";
 import "markdown-navbar/dist/navbar.css";
 import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
 import {
+  bgInfoMap,
   mainPageLeftGridConfig,
   mainPageRightGridConfig,
 } from "@/config/baseConfig";
 import { GetServerSideProps } from "next";
 import { ArticleListItem } from "@/pages/types/article";
+import { MenuType } from "@libs/interface";
 
-const MyList: FC<{ list: ArticleListItem[]; typeId: number }> = ({
-  list,
-  typeId,
-}) => {
+const MyList: FC<{
+  list: ArticleListItem[];
+  typeId: number;
+  typeName: string;
+}> = ({ list, typeId, typeName }) => {
   const [myList, setMyList] = useState(list);
   const renderer = new marked.Renderer();
 
@@ -48,7 +51,19 @@ const MyList: FC<{ list: ArticleListItem[]; typeId: number }> = ({
   });
   return (
     <>
-      <Header typeId={typeId} />
+      <Header className=" bg-no-repeat bg-cover absolute inset-x-0 top-0" />
+      <div className="bg-info-bg bg-no-repeat bg-cover">
+        <div className=" container mx-auto  mb-5">
+          <div className="py-40">
+            <h1 className="text-8xl text-white text-center font-bold  mb-2">
+              {typeName}
+            </h1>
+            <p className="text-xl text-white text-center font-serif">
+              {bgInfoMap[typeId]?.info}
+            </p>
+          </div>
+        </div>
+      </div>
       <div className="main-content">
         <Row justify="center">
           <Col
@@ -133,10 +148,15 @@ export const getServerSideProps: GetServerSideProps<{
       servicePath.getListById + "/" + queryId
     ),
     list = res.data.data;
+  const typeInfoRes = await axios.get<{ data: MenuType }>(
+      servicePath.getTypeInfoById + "/" + queryId
+    ),
+    typeInfo = typeInfoRes.data.data;
   return {
     props: {
       list,
       typeId: id,
+      typeName: typeInfo ? typeInfo.typeName : null,
     },
   };
 };
