@@ -43,11 +43,10 @@ const MenuTreeNode: FC<{ menuItem: MenuType }> = ({ menuItem, ...rest }) => {
     );
   }
 };
-interface prop extends React.HTMLAttributes<HTMLElement> {
-  typeId?: number;
-  typeName?: string;
+interface prop extends React.HTMLAttributes<HTMLDivElement> {
+  type?: "article";
 }
-const Header: FC<prop> = ({ className }) => {
+const Header: FC<prop> = ({ className, type }) => {
   const [navArray, setNavArray] = useState<MenuType[]>([]);
 
   useEffect(() => {
@@ -74,7 +73,12 @@ const Header: FC<prop> = ({ className }) => {
       <div className="container mx-auto h-full flex place-content-between items-center">
         <div className="space-x-2 items-center">
           <a
-            className="text-2xl hover:text-opacity-80 text-white font-extrabold inline-block h-full"
+            className={classNames(
+              "text-2xl  font-extrabold inline-block h-full",
+              type === "article"
+                ? "text-black"
+                : "text-white hover:text-opacity-80 "
+            )}
             href="/"
           >
             {BLOG_NAME}
@@ -87,7 +91,14 @@ const Header: FC<prop> = ({ className }) => {
                 href={item.id ? `/list/list?id=${item.id}` : "/"}
                 key={item.id}
               >
-                <a className="font-extrabold hover:text-opacity-80 text-white text-xs">
+                <a
+                  className={classNames(
+                    '"font-extrabold  font-bold text-xs"',
+                    type === "article"
+                      ? "text-black"
+                      : "text-white hover:text-opacity-80"
+                  )}
+                >
                   {item.typeName}
                 </a>
               </Link>

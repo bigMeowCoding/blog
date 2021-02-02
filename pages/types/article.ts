@@ -4,5 +4,6 @@ export interface ArticleListItem {
   introduce: string;
   title: string;
   view_count: number;
-  typeName: string;
+  type_id: string;
+  article_content: string;
 }

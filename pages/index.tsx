@@ -31,7 +31,7 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
   });
   return (
     <>
-      <Header className=" bg-no-repeat bg-cover absolute inset-x-0 top-0" />
+      <Header className=" bg-no-repeat bg-cover absolute inset-x-0 top-0 mb-5" />
       <BgInfo
         title={BLOG_NAME}
         info="「不要因为走得太远 而忘记为什么出发」"
