@@ -4,7 +4,6 @@ import React, { FC } from "react";
 import Footer from "@/components/footer/Footer";
 import axios from "axios";
 import servicePath from "@/config/apiUrl";
-import Link from "next/link";
 import "markdown-navbar/dist/navbar.css";
 import marked from "marked";
 import hljs from "highlight.js";
@@ -14,6 +13,7 @@ import { GetServerSideProps } from "next";
 import { ArticleListItem } from "@/pages/types/article";
 import { MenuType } from "@libs/interface";
 import BgInfo from "@/components/bg-info/bg-info";
+import ArticleList from "@/components/article-list";
 
 const MyList: FC<{
   list: ArticleListItem[];
@@ -53,31 +53,7 @@ const MyList: FC<{
            sm:col-span-12
             md:col-span-10 md:col-start-2"
             >
-              {list.map((item) => {
-                return (
-                  <div key={item.id}>
-                    <div className="list-title">
-                      <Link
-                        href={{
-                          pathname: `/detail/detail`,
-                          query: { id: item.id, typeName: item.typeName },
-                        }}
-                      >
-                        <h3 className="text-2xl mb-4 font-bold text-gray-700">
-                          {item.title}
-                        </h3>
-                      </Link>
-                    </div>
-
-                    <div
-                      className="text-gray-400 text-sm font-serif italic"
-                      dangerouslySetInnerHTML={{
-                        __html: marked(item.introduce),
-                      }}
-                    />
-                  </div>
-                );
-              })}
+             <ArticleList list={list}/>
             </div>
           </div>
         </div>
