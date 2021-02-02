@@ -54,11 +54,11 @@ const Header: FC<prop> = ({ className }) => {
     const fetchData = async () => {
       const result = await axios
         .get<{
-          data: MenuType[];
+          data: [];
         }>(servicePath.getTypeInfo)
         .then((res) => {
           const data = res.data.data;
-          data.sort((a, b) => {
+          data.sort((a: MenuType, b: MenuType) => {
             return a.orderNumber - b.orderNumber;
           });
           setNavArray(data);
@@ -83,7 +83,10 @@ const Header: FC<prop> = ({ className }) => {
         <div className="text-gray-600 flex space-x-4">
           {navArray.map((item) => {
             return (
-              <Link href={item.id ? `/list/list?id=${item.id}` : "/"} key={item.id}>
+              <Link
+                href={item.id ? `/list/list?id=${item.id}` : "/"}
+                key={item.id}
+              >
                 <a className="font-extrabold hover:text-opacity-80 text-white text-xs">
                   {item.typeName}
                 </a>

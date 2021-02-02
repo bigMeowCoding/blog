@@ -1,6 +1,5 @@
 import Header from "@/components/header/Header";
-import React, { FC, useEffect, useState } from "react";
-
+import React, { FC } from "react";
 
 import Footer from "@/components/footer/Footer";
 import axios from "axios";
@@ -10,9 +9,7 @@ import "markdown-navbar/dist/navbar.css";
 import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
-import {
-  bgInfoMap,
-} from "@/config/baseConfig";
+import { bgInfoMap } from "@/config/baseConfig";
 import { GetServerSideProps } from "next";
 import { ArticleListItem } from "@/pages/types/article";
 import { MenuType } from "@libs/interface";
@@ -23,12 +20,7 @@ const MyList: FC<{
   typeId: number;
   typeName: string;
 }> = ({ list, typeId, typeName }) => {
-  const [myList, setMyList] = useState(list);
   const renderer = new marked.Renderer();
-
-  useEffect(() => {
-    setMyList(list);
-  }, []);
 
   marked.setOptions({
     renderer: renderer,
@@ -46,7 +38,11 @@ const MyList: FC<{
   return (
     <>
       <Header className=" bg-no-repeat bg-cover absolute inset-x-0 top-0" />
-      <BgInfo title={typeName} info={bgInfoMap[typeId]?.info} className={bgInfoMap[typeId]?.bg}/>
+      <BgInfo
+        title={typeName}
+        info={bgInfoMap[typeId]?.info}
+        className={bgInfoMap[typeId]?.bg}
+      />
 
       <div className="mx-auto md:container">
         <div>
@@ -57,7 +53,7 @@ const MyList: FC<{
            sm:col-span-12
             md:col-span-10 md:col-start-2"
             >
-              {myList.map((item) => {
+              {list.map((item) => {
                 return (
                   <div key={item.id}>
                     <div className="list-title">
