@@ -16,7 +16,7 @@ const ArticleList: FC<Prop> = ({ list }) => {
                 <Link
                     href={{
                       pathname: `/detail/detail`,
-                      query: { id: item.id, typeName: item.typeName },
+                      query: { id: item.id },
                     }}
                 >
                   <h3 className="text-2xl mb-4 font-bold text-gray-700">

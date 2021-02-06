@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, forwardRef, useEffect, useState } from "react";
 import { Menu } from "antd";
 import {
   YoutubeOutlined,
@@ -44,9 +44,10 @@ const MenuTreeNode: FC<{ menuItem: MenuType }> = ({ menuItem, ...rest }) => {
   }
 };
 interface prop extends React.HTMLAttributes<HTMLDivElement> {
-  type?: "article";
+  type?: "article" | "fixed";
 }
-const Header: FC<prop> = ({ className, type }) => {
+
+const Header = forwardRef<HTMLDivElement, prop>(({ className, type }, ref) => {
   const [navArray, setNavArray] = useState<MenuType[]>([]);
 
   useEffect(() => {
@@ -69,13 +70,22 @@ const Header: FC<prop> = ({ className, type }) => {
   }, []);
 
   return (
-    <div className={classNames("h-12 ", className)}>
+    <div
+      ref={ref}
+      className={classNames(
+        "h-16 ",
+        className,
+        type === "fixed" ? "fixed z-10" : "absolute",
+        type === "fixed" ? "bg-white bg-opacity-90" : null,
+        type === "fixed" ? "border-b border-gray-200 " : null
+      )}
+    >
       <div className="container mx-auto h-full flex place-content-between items-center">
         <div className="space-x-2 items-center">
           <a
             className={classNames(
               "text-2xl  font-extrabold inline-block h-full",
-              type === "article"
+              type === "article" || type === "fixed"
                 ? "text-black"
                 : "text-white hover:text-opacity-80 "
             )}
@@ -94,7 +104,7 @@ const Header: FC<prop> = ({ className, type }) => {
                 <a
                   className={classNames(
                     '"font-extrabold  font-bold text-xs"',
-                    type === "article"
+                    type === "article" || type === "fixed"
                       ? "text-black"
                       : "text-white hover:text-opacity-80"
                   )}
@@ -108,5 +118,5 @@ const Header: FC<prop> = ({ className, type }) => {
       </div>
     </div>
   );
-};
+});
 export default Header;

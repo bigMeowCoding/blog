@@ -1,5 +1,5 @@
 import Header from "@/components/header/Header";
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 
 import "markdown-navbar/dist/navbar.css";
 import marked from "marked";
@@ -14,9 +14,13 @@ import { ArticleListItem } from "@/pages/types/article";
 import { BLOG_NAME } from "@/config/baseConfig";
 import BgInfo from "@/components/bg-info/bg-info";
 import ArticleList from "@/components/article-list";
+import classNames from "classnames";
 
 const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
-  const renderer = new marked.Renderer();
+  const renderer = new marked.Renderer(),
+    scrollTopRef = useRef<number>(),
+    hRef = useRef<HTMLDivElement>(null),
+    [rollBack, setRollBack] = useState(false);
   marked.setOptions({
     renderer: renderer,
     gfm: true,
@@ -29,9 +33,31 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
       return hljs.highlightAuto(code).value;
     },
   });
+  useEffect(() => {
+    document?.addEventListener(
+      "scroll",
+      () => {
+        const headerHeight = hRef.current?.clientHeight;
+        if (!headerHeight) {
+          return;
+        }
+        const newScrollTop = document.documentElement.scrollTop;
+        const rollBack =
+          newScrollTop < (scrollTopRef.current || 0) &&
+          headerHeight < newScrollTop;
+        scrollTopRef.current = newScrollTop;
+        setRollBack(rollBack);
+      },
+      false
+    );
+  }, []);
   return (
     <>
-      <Header className=" bg-no-repeat bg-cover absolute inset-x-0 top-0 mb-5" />
+      <Header
+        ref={hRef}
+        type={rollBack ? "fixed" : undefined}
+        className={classNames("bg-no-repeat bg-cover  inset-x-0 top-0 mb-5")}
+      />
       <BgInfo
         title={BLOG_NAME}
         info="「不要因为走得太远 而忘记为什么出发」"
