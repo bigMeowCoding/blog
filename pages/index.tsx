@@ -1,5 +1,5 @@
 import Header from "@/components/header/Header";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC } from "react";
 
 import "markdown-navbar/dist/navbar.css";
 import marked from "marked";
@@ -15,12 +15,10 @@ import { BLOG_NAME } from "@/config/baseConfig";
 import BgInfo from "@/components/bg-info/bg-info";
 import ArticleList from "@/components/article-list";
 import classNames from "classnames";
+import { useHeaderFixed } from "@libs/hooks/header-fixed";
 
 const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
-  const renderer = new marked.Renderer(),
-    scrollTopRef = useRef<number>(),
-    hRef = useRef<HTMLDivElement>(null),
-    [rollBack, setRollBack] = useState(false);
+  const renderer = new marked.Renderer();
   marked.setOptions({
     renderer: renderer,
     gfm: true,
@@ -33,24 +31,7 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
       return hljs.highlightAuto(code).value;
     },
   });
-  useEffect(() => {
-    document?.addEventListener(
-      "scroll",
-      () => {
-        const headerHeight = hRef.current?.clientHeight;
-        if (!headerHeight) {
-          return;
-        }
-        const newScrollTop = document.documentElement.scrollTop;
-        const rollBack =
-          newScrollTop < (scrollTopRef.current || 0) &&
-          headerHeight < newScrollTop;
-        scrollTopRef.current = newScrollTop;
-        setRollBack(rollBack);
-      },
-      false
-    );
-  }, []);
+  const { hRef, rollBack } = useHeaderFixed();
   return (
     <>
       <Header

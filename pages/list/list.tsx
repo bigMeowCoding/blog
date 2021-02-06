@@ -14,6 +14,7 @@ import { ArticleListItem } from "@/pages/types/article";
 import { MenuType } from "@libs/interface";
 import BgInfo from "@/components/bg-info/bg-info";
 import ArticleList from "@/components/article-list";
+import { useHeaderFixed } from "@libs/hooks/header-fixed";
 
 const MyList: FC<{
   list: ArticleListItem[];
@@ -34,10 +35,15 @@ const MyList: FC<{
       return hljs.highlightAuto(code).value;
     },
   });
+  const { hRef, rollBack } = useHeaderFixed();
 
   return (
     <>
-      <Header className=" bg-no-repeat bg-cover absolute inset-x-0 top-0" />
+      <Header
+        ref={hRef}
+        type={rollBack ? "fixed" : undefined}
+        className=" bg-no-repeat bg-cover  inset-x-0 top-0"
+      />
       <BgInfo
         title={typeName}
         info={bgInfoMap[typeId]?.info}
@@ -53,7 +59,7 @@ const MyList: FC<{
            sm:col-span-12
             md:col-span-10 md:col-start-2"
             >
-             <ArticleList list={list}/>
+              <ArticleList list={list} />
             </div>
           </div>
         </div>

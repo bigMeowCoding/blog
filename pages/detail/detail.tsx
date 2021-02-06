@@ -12,11 +12,9 @@ import servicePath from "@/config/apiUrl";
 import { GetServerSideProps } from "next";
 import { ArticleListItem } from "@/pages/types/article";
 import { parseQueryParam } from "@libs/utils/parseQueryParam";
+import { useHeaderFixed } from "@libs/hooks/header-fixed";
 type Prop = ArticleListItem & { typeName?: string; typeId: string };
-const Detail: FC<Prop> = ({
-  article_content,
-  title,
-}) => {
+const Detail: FC<Prop> = ({ article_content, title }) => {
   const renderer = new marked.Renderer();
   marked.setOptions({
     renderer: renderer,
@@ -30,11 +28,17 @@ const Detail: FC<Prop> = ({
       return highlight.highlightAuto(code).value;
     },
   });
+  const { hRef, rollBack } = useHeaderFixed();
+
   let html = marked(article_content);
   return (
     <>
-      <Header type="article" className="mb-5" />
-      <article className="mx-auto container">
+      <Header
+        ref={hRef}
+        type={rollBack ? "fixed" : "article"}
+        className="inset-x-0 top-0"
+      />
+      <article className="mx-auto container mt-16">
         <div className="grid grid-cols-12">
           <h1
             className="lg:col-span-8 lg:col-start-3
