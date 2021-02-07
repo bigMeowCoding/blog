@@ -1,2 +1,12 @@
 @import "./variables/index.scss";
 @import "./markdown";
+.bg-index-info {
+  background-image: url("../public/images/info-bg.jpg");
+}
+.bg-frontend-info {
+  background-image: url("../public/images/frontend-info-bg.png");
+}
+
+.bg-base-info {
+  background-image: url("../public/images/base-info-bg.png");
+}
