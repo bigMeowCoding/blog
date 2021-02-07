@@ -10,7 +10,7 @@ import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
 import { bgInfoMap } from "@/config/baseConfig";
 import { GetServerSideProps } from "next";
-import { ArticleListItem } from "@/pages/types/article";
+import { ArticleListItem } from "@/@types/article";
 import { MenuType } from "@libs/interface";
 import BgInfo from "@/components/bg-info/bg-info";
 import ArticleList from "@/components/article-list";

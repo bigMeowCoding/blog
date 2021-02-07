@@ -10,7 +10,7 @@ import Footer from "@/components/footer/Footer";
 import axios from "axios";
 import servicePath from "@/config/apiUrl";
 import { GetServerSideProps } from "next";
-import { ArticleListItem } from "@/pages/types/article";
+import { ArticleListItem } from "@/@types/article";
 import { parseQueryParam } from "@libs/utils/parseQueryParam";
 import { useHeaderFixed } from "@libs/hooks/header-fixed";
 type Prop = ArticleListItem & { typeName?: string; typeId: string };

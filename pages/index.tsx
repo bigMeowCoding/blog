@@ -10,7 +10,7 @@ import Footer from "@/components/footer/Footer";
 import axios from "axios";
 import servicePath from "../config/apiUrl";
 import { GetServerSideProps } from "next";
-import { ArticleListItem } from "@/pages/types/article";
+import { ArticleListItem } from "@/@types/article";
 import { BLOG_NAME } from "@/config/baseConfig";
 import BgInfo from "@/components/bg-info/bg-info";
 import ArticleList from "@/components/article-list";

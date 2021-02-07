@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import marked from "marked";
-import { ArticleListItem } from "@/pages/types/article";
+import { ArticleListItem } from "@/@types/article";
 
 interface Prop {
   list: ArticleListItem[];
