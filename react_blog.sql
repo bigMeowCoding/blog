@@ -26,7 +26,7 @@ CREATE TABLE `admin_user` (
   `password` varchar(255) DEFAULT NULL,
   `id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of admin_user
@@ -50,7 +50,7 @@ CREATE TABLE `article` (
   `view_count` int NOT NULL DEFAULT '0',
   `id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of article
@@ -67,10 +67,10 @@ DROP TABLE IF EXISTS `article_image`;
 CREATE TABLE `article_image` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` mediumtext NOT NULL,
-  `type` varchar(0) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `type` varchar(0) CHARACTER SET utf8 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `articleId` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of article_image
@@ -88,7 +88,7 @@ CREATE TABLE `type` (
   `id` int NOT NULL AUTO_INCREMENT,
   `icon` int DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of type
