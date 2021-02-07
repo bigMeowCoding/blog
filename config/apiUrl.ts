@@ -1,5 +1,5 @@
- // let ipUrl = 'http://www.bigmeow.club:7002/default/'
-let ipUrl = 'http://127.0.0.1:7002/default/'
+ let ipUrl = 'http://www.bigmeow.club:7001/default/'
+// let ipUrl = 'http://127.0.0.1:7002/default/'
 
 let servicePath = {
     getArticleList:ipUrl + 'getArticleList' ,  //  首页文章列表接口
