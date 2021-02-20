@@ -45,19 +45,17 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
         className="bg-index-info   mb-5"
       />
       <div className="mx-auto md:container">
-        <div>
-          <div className="grid grid-cols-12">
-            <div
-              className="lg:col-span-7 lg:col-start-2
+        <div className="grid grid-cols-12">
+          <div
+            className="lg:col-span-7 lg:col-start-2
               lg:pr-8 md:pr-8
-           sm:col-span-12
+           col-span-12
             md:col-span-8 md:col-start-2 -mb-3"
-            >
-              <ArticleList list={list} />
-            </div>
-            <div className="lg:col-span-3  sm:col-span-12 md:col-span-3  lg:pr-16">
-              <Author />
-            </div>
+          >
+            <ArticleList list={list} />
+          </div>
+          <div className="lg:col-span-3  col-span-12 md:col-span-3  lg:pr-16">
+            <Author />
           </div>
         </div>
       </div>

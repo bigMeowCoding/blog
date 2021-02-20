@@ -42,7 +42,7 @@ const Detail: FC<Prop> = ({ article_content, title }) => {
         <div className="grid grid-cols-12">
           <h1
             className="lg:col-span-8 lg:col-start-3
-           sm:col-span-12 text-6xl font-serif  mb-16
+           col-span-12 text-6xl font-serif  mb-16
             md:col-span10 md:col-start-2"
           >
             {title}
@@ -51,7 +51,7 @@ const Detail: FC<Prop> = ({ article_content, title }) => {
         <div className="grid grid-cols-12">
           <div
             className="lg:col-span-8 lg:col-start-3
-           sm:col-span-12
+           col-span-12
             md:col-span10 md:col-start-2"
           >
             <div

@@ -51,16 +51,14 @@ const MyList: FC<{
       />
 
       <div className="mx-auto md:container">
-        <div>
-          <div className="grid grid-cols-12">
-            <div
-              className="lg:col-span-8 lg:col-start-3
-              lg:pr-8
-           sm:col-span-12
+        <div className="grid grid-cols-12">
+          <div
+            className="lg:col-span-8 lg:col-start-3
+           lg:pr-8
+           col-span-12
             md:col-span-10 md:col-start-2"
-            >
-              <ArticleList list={list} />
-            </div>
+          >
+            <ArticleList list={list} />
           </div>
         </div>
       </div>
