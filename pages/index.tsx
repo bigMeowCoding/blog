@@ -1,6 +1,5 @@
 import Header from "@/components/header/Header";
 import React, { FC } from "react";
-
 import "markdown-navbar/dist/navbar.css";
 import marked from "marked";
 import hljs from "highlight.js";
@@ -47,14 +46,11 @@ const Home: FC<{ list: ArticleListItem[] }> = ({ list }) => {
       <div className="mx-auto md:container">
         <div className="grid grid-cols-12">
           <div
-            className="lg:col-span-7 lg:col-start-2
-              lg:pr-8 md:pr-8
-           col-span-12
-            md:col-span-8 md:col-start-2 -mb-3"
+            className="response-left"
           >
             <ArticleList list={list} />
           </div>
-          <div className="lg:col-span-3  col-span-12 md:col-span-3  lg:pr-16">
+          <div className="response-right">
             <Author />
           </div>
         </div>
