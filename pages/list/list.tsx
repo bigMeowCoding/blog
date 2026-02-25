@@ -69,6 +69,7 @@ const MyList: FC<{
 export const getServerSideProps: GetServerSideProps<{
   list: ArticleListItem[];
   typeId: number;
+  typeName: string;
 }> = async (context) => {
   let queryId = context.query.id;
   const id = typeof queryId === "string" ? parseInt(queryId) : -1;
@@ -84,7 +85,7 @@ export const getServerSideProps: GetServerSideProps<{
     props: {
       list,
       typeId: id,
-      typeName: typeInfo ? typeInfo.typeName : null,
+      typeName: typeInfo?.typeName || "",
     },
   };
 };
